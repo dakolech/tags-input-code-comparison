@@ -1,8 +1,10 @@
-const express = require('express');
+import express from 'express';
+import path from 'path';
+
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.sendFile(path.join(`${__dirname}/index.html`));
 });
 
-app.listen(3000);
+app.listen(4000);
