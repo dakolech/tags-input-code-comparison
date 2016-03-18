@@ -1,0 +1,23 @@
+{
+  "name": "tags-input-code-comparison",
+  "version": "0.0.1",
+  "description": "Code comparison of different implementations same tags-input component.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./node_modules/karma/bin/karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dakolech/tags-input-code-comparison.git"
+  },
+  "author": "Daniel Koza <dakolech@gmail.com> (https://github.com/dakolech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dakolech/tags-input-code-comparison/issues"
+  },
+  "homepage": "https://github.com/dakolech/tags-input-code-comparison#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
