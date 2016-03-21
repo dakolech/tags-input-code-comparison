@@ -18,7 +18,8 @@
     "start": "babel-node index.js",
     "auto-start": "nodemon --exec \"npm start\"",
     "test": "./node_modules/karma/bin/karma start",
-    "test-travis": "./node_modules/karma/bin/karma start --single-run --browsers=Chrome_travis_ci,Firefox"
+    "test-travis": "./node_modules/karma/bin/karma start --single-run --browsers=Chrome_travis_ci,Firefox",
+    "travis": "npm run lint && npm run test-travis"
   },
   "dependencies": {
     "angular": "^1.5.2",

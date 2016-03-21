@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '5'
 script:
-  -  npm run-script test-travis
+  -  npm run-script travis
 before_script:
   - npm install
 before_install:
