@@ -1,0 +1,15 @@
+.tags-wrapper .tags-container {
+  margin-bottom: 10px;
+}
+.tags-wrapper .tags-container .tag {
+  margin: 5px;
+}
+.tags-wrapper .tags-container .tag b.fa.fa-times.cross {
+  cursor: pointer;
+}
+.tags-wrapper ul.suggestions-list {
+  width: 200px;
+}
+.tags-wrapper ul.suggestions-list li.suggested-tag {
+  cursor: pointer;
+}
