@@ -57,7 +57,7 @@ app.get('/angular', (req, res) => {
   res.render('src/angular/index');
 });
 
-app.get('/angular/tags-input', (req, res) => {
+app.get('/angular/component/tags-input.html', (req, res) => {
   res.render('src/angular/component/tags-input');
 });
 
