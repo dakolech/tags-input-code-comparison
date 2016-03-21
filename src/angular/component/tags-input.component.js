@@ -8,8 +8,8 @@ const tagsInput = {
   scope: {},
   templateUrl: 'component/tags-input.html',
   bindings: {
-    ngModel: '=',
-    name: '@',
+    ngModel: '=?',
+    name: '@?',
     placeholder: '@?',
     ngChange: '&?'
   },

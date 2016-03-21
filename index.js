@@ -11,29 +11,35 @@ import bodyParser from 'body-parser';
 import fs from 'fs';
 import tagsFile from './tmp/tags/all';
 
+const isDeveloping = process.env.NODE_ENV !== 'production';
+const port = isDeveloping ? 4000 : process.env.PORT;
+
 const tagsFileName = './tmp/tags/all.json';
 
 const app = express();
 
-const compiler = webpack(config);
-const middleware = webpackMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  contentBase: 'src',
-  hot: true,
-  inline: true,
-  stats: {
-    colors: true,
-    hash: false,
-    timings: true,
-    chunks: false,
-    chunkModules: false,
-    modules: false
-  }
-});
+if (isDeveloping) {
+  const compiler = webpack(config);
+  const middleware = webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: 'src',
+    hot: true,
+    inline: true,
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
+    }
+  });
 
-app.use(middleware);
-app.use(webpackHotMiddleware(compiler));
-
+  app.use(middleware);
+  app.use(webpackHotMiddleware(compiler));
+} else {
+  app.use(express.static(__dirname + '/dist'));
+}
 app.use(bodyParser.json());
 
 app.set('views', __dirname);
@@ -78,4 +84,4 @@ app.post('/tags', (req, res) => {
   });
 });
 
-app.listen(4000);
+app.listen(port);
