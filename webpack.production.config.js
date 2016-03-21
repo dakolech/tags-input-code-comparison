@@ -4,7 +4,6 @@ var webpack = require('webpack');
 module.exports = {
   entry: {
     angular: [
-      'webpack-hot-middleware/client?reload=true',
       path.join(__dirname, 'src/angular/tags-input.module.js')
     ]
   },
