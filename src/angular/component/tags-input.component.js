@@ -8,10 +8,10 @@ const tagsInput = {
   scope: {},
   templateUrl: 'tags-input',
   bindToController: {
-  ngModel: '=',
-  name: '@',
-  placeholder: '@?',
-  ngChange: '&?'
+    ngModel: '=',
+    name: '@',
+    placeholder: '@?',
+    ngChange: '&?'
   },
   controllerAs: 'tagsInputVM',
   controller: 'tagsInputController'

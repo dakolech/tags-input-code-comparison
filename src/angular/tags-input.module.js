@@ -1,3 +1,4 @@
+import angular from 'angular';
 import tagsService from './service/tags.service';
 import tagsInput from './component/tags-input.component';
 
