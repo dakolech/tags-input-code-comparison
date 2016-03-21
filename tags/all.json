@@ -1,0 +1,15 @@
+[
+    {
+        "id": 1,
+        "name": "holidays"
+    }, {
+        "id": 2,
+        "name": "shopping"
+    }, {
+        "id": 3,
+        "name": "far future"
+    }, {
+        "id": 4,
+        "name": "character"
+    }
+]
