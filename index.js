@@ -34,6 +34,7 @@ app.use(express.static('css'));
 app.use(express.static('src'));
 
 app.use(express.static('node_modules/angular'));
+app.use(express.static('node_modules/bootstrap/dist/css'));
 
 app.get('/tags', (req, res) => {
   res.sendFile(path.join(__dirname, '/tags/all.json'));
