@@ -7,7 +7,7 @@ class tagsService {
     }
 
     createOne(tag) {
-        return this.$http.post(this._colletionName, tag);
+        return this.$http.post(this._colletionName, { name: tag });
     }
 
     getAllTags() {

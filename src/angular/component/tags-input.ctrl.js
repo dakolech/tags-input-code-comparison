@@ -107,8 +107,8 @@ function tagsInputController($scope, tagsService) {
     if (!!isTag) {
       this.addToSelectedTags(isTag.id);
     } else {
-      tagsService.createOne(this.searchText).then((data) => {
-        this.ngModel.push(data);
+      tagsService.createOne(this.searchText).then((resp) => {
+        this.ngModel.push(resp.data);
         this.searchText = '';
       });
     }
