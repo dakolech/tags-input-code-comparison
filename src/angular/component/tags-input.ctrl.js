@@ -21,7 +21,6 @@ function tagsInputController($scope, tagsService) {
     this.allTags = resp.data;
     if (this.ngModel.length > 0) {
       this.allTags = this.allTags.filter((item) => {
-        //FIXME PhantomJS find method
         let foundItem = this.ngModel.find((innerItem) => innerItem.id === item.id);
         return !foundItem;
       });

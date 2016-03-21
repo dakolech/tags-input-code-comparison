@@ -1,68 +1,45 @@
-describe('Service: tagsService', function() {
-var
-    tagsService,
-    mockedRestangular = {
-    all: angular.noop
-    },
-    simpleTag = {
-    id: 1,
-    name: 'superGoal'
-    },
-    postObject,
-    tagsURL = 'tags',
-    getListCalled;
+import serviceModule from './tags.service';
 
-beforeEach(module('bucketList.tags', {
-    Restangular: mockedRestangular
-}));
+describe('Service: tagsService', () => {
+  let tagsService;
+  const mockedHttp = {
+    get: angular.noop,
+    post: angular.noop
+  };
+  const simpleTag = 'superGoal';
+  const tagsURL = '/tags';
 
-beforeEach(inject(function($injector) {
+  beforeEach(window.module(serviceModule.name, {
+    $http: mockedHttp
+  }));
+
+  beforeEach(inject(function($injector) {
     tagsService = $injector.get('tagsService');
-    postObject = {};
-    getListCalled = false;
-}));
+  }));
 
-it('should initialize', function() {
+  it('should initialize', () => {
     expect(!!tagsService).toBeTruthy();
-});
+  });
 
-describe('createOne method', function() {
-    beforeEach(function() {
-    spyOn(mockedRestangular, 'all').and.returnValue({
-        post: function(sendObject) {
-        postObject = sendObject;
-        }
+  describe('createOne method', () => {
+    beforeEach(() => {
+      spyOn(mockedHttp, 'post').and.callThrough();
+      tagsService.createOne(simpleTag);
     });
 
-    tagsService.createOne(simpleTag);
+    it('should call post method on $hhtp with tagsURL and tag object', () => {
+      expect(mockedHttp.post).toHaveBeenCalledWith(tagsURL, { name: simpleTag });
+    });
+  });
+
+  describe('getAllTags method', () => {
+    beforeEach(() => {
+      spyOn(mockedHttp, 'get').and.callThrough();
+      tagsService.getAllTags();
     });
 
-    it('should call all method on Restangular with tagsURL', function() {
-    expect(mockedRestangular.all).toHaveBeenCalledWith(tagsURL);
+    it('should call get method on $hhtp with tagsURL', () => {
+      expect(mockedHttp.get).toHaveBeenCalledWith(tagsURL);
     });
-
-    it('should call post method on Restangular.all with simpleTag', function() {
-    expect(postObject).toEqual(postObject);
-    });
-});
-
-describe('getAllTags method', function() {
-    beforeEach(function() {
-    spyOn(mockedRestangular, 'all').and.returnValue({
-        getList: function() {
-        getListCalled = true;
-        }
-    });
-
-    tagsService.getAllTags();
-    });
-
-    it('should call all method on Restangular with tagsURL', function() {
-    expect(mockedRestangular.all).toHaveBeenCalledWith(tagsURL);
-    });
-
-    it('should call getList method on Restangular.all', function() {
-    expect(getListCalled).toBe(true);
-    });
-});
+  });
 });
