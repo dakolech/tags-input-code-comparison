@@ -1,0 +1,15 @@
+.tags-input
+  ng-form(name="{{tagsInputVM.name || 'form'}}").tags-wrapper
+    .tags-container
+      .tag.label.label-primary(ng-repeat="selectedTag in tagsInputVM.ngModel track by selectedTag.id")
+        span.tag-name(ng-bind="selectedTag.name")
+        span &nbsp;
+          b.fa.fa-times.cross(ng-click="tagsInputVM.removeTag(selectedTag.id)")
+    input.form-control(type="text", placeholder="{{tagsInputVM.placeholder}}", name="tag", ng-keydown="tagsInputVM.checkKeyDown($event)",
+        ng-model="tagsInputVM.searchText", ng-change="tagsInputVM.search()", autocomplete="off", special-chars)
+    ul.list-group.suggestions-list
+      li.list-group-item.suggested-tag(ng-repeat="suggestion in tagsInputVM.suggestions track by suggestion.id",
+          ng-click="tagsInputVM.addToSelectedTags(suggestion.id)", ng-mouseover="tagsInputVM.selectedIndex = $index",
+          ng-class="{ active : tagsInputVM.selectedIndex === $index || \
+              suggestion.name.toLowerCase() === tagsInputVM.searchText.toLowerCase() }",
+          ng-bind="suggestion.name")
