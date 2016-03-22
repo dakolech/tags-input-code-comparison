@@ -12,6 +12,6 @@ app.use(express.static('src'));
 app.use(express.static('node_modules/angular'));
 app.use(express.static('node_modules/bootstrap/dist/css'));
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.get('/', (req, res) =>
+  res.render('index')
+);
