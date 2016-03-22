@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "angular"
-  ],
   "rules": {
     "max-len": [
       2,
