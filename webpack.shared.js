@@ -1,11 +1,22 @@
 const path = require('path');
 
 module.exports = {
-  entry: {
-    angular: [
-      'webpack-hot-middleware/client?reload=true',
-      path.join(__dirname, 'src/angular/tags-input.module.js')
-    ]
+  entry: (env) => {
+    const entries = {
+      angular: [
+        path.join(__dirname, 'src/angular/tags-input.module.js')
+      ]
+    }
+
+    if (env === 'dev') {
+      for (const key in entries) {
+        if (entries.hasOwnProperty(key)) {
+          entries[key].push('webpack-hot-middleware/client?reload=true');
+        }
+      }
+    }
+
+    return entries;
   },
 
   output: {

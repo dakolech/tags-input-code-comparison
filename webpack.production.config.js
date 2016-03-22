@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const sharedWebpack = require('./webpack.shared');
 
 module.exports = {
-  entry: sharedWebpack.entry,
+  entry: sharedWebpack.entry(),
   output: sharedWebpack.output,
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

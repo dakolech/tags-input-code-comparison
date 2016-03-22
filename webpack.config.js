@@ -5,7 +5,7 @@ export default {
   cache: true,
   debug: true,
   watch: true,
-  entry: sharedWebpack.entry,
+  entry: sharedWebpack.entry('dev'),
   output: sharedWebpack.output,
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
