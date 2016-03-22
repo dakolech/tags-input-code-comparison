@@ -1,17 +1,9 @@
-const path = require('path');
 const webpack = require('webpack');
+const sharedWebpack = require('./webpack.shared');
 
 module.exports = {
-  entry: {
-    angular: [
-      path.join(__dirname, 'src/angular/tags-input.module.js')
-    ]
-  },
-  output: {
-    path: path.join(__dirname, '/dist/'),
-    filename: '[name]/app.js',
-    publicPath: '/'
-  },
+  entry: sharedWebpack.entry,
+  output: sharedWebpack.output,
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -24,15 +16,6 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
-      },
-    ]
+    loaders: sharedWebpack.loaders
   }
 };

@@ -1,34 +1,16 @@
-import path from 'path';
 import webpack from 'webpack';
+import sharedWebpack from './webpack.shared';
 
 export default {
   cache: true,
   debug: true,
   watch: true,
-  entry: {
-    angular: [
-      'webpack-hot-middleware/client?reload=true',
-      path.join(__dirname, 'src/angular/tags-input.module.js')
-    ]
-  },
-  output: {
-    path: path.join(__dirname, '/dist/'),
-    filename: '[name]/app.js',
-    publicPath: '/'
-  },
+  entry: sharedWebpack.entry,
+  output: sharedWebpack.output,
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
-    loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
-      },
-    ]
+    loaders: sharedWebpack.loaders
   }
 };
