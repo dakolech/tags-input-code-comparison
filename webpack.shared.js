@@ -5,6 +5,9 @@ module.exports = {
     const entries = {
       angular: [
         path.join(__dirname, 'src/angular/tags-input.module.js')
+      ],
+      'angular-rx': [
+        path.join(__dirname, 'src/angular-rx/tags-input.module.js')
       ]
     }
 
