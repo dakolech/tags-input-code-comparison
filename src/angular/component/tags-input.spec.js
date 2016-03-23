@@ -28,7 +28,6 @@ describe('Directive: tagsInput', () => {
   let successCallback;
   let successCallbackCreate;
 
-  beforeEach(window.module('templates'));
   beforeEach(window.module(componentModule.name, {
     tagsService: mockedTagsService
   }));

@@ -1,13 +1,15 @@
 import tagsInputController from './tags-input.ctrl';
 import tagsInputService from './tags-input.service';
 
+import template from 'jade!./tags-input.jade';
+
 const componentName = 'tagsInput';
 
 const tagsInput = {
   restrict: 'AE',
   replace: true,
   scope: {},
-  templateUrl: 'angular-rx/component/tags-input.html',
+  template: template(),
   bindings: {
     ngModel: '=?',
     name: '@?',

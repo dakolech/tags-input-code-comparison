@@ -8,15 +8,13 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/rx/dist/rx.all.js',
       'node_modules/rx-angular/dist/rx.angular.js',
-      'src/**/*.jade',
       'src/**/*.spec.js'
     ],
     autoWatch: true,
     browsers: ['Chrome'],
     reporters: ['progress'],
     preprocessors: {
-      'src/**/*.spec.js': ['webpack', 'sourcemap'],
-      'src/**/*.jade': ['ng-jade2js']
+      'src/**/*.spec.js': ['webpack', 'sourcemap']
     },
     webpack: {
       cache: true,
@@ -57,10 +55,6 @@ module.exports = function(config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    singleRun: false,
-    ngJade2JsPreprocessor: {
-      moduleName: 'templates',
-      stripPrefix: 'src/'
-    }
+    singleRun: false
   });
 };

@@ -27,7 +27,6 @@ describe('Directive: tagsInput', function() {
     createOne: () => createOneStream
   };
 
-  beforeEach(window.module('templates'));
   beforeEach(window.module('rx'));
   beforeEach(window.module(componentModule.name, {
     tagsService: mockedTagsService
