@@ -19,5 +19,5 @@ class tagsService {
 
 tagsService.$inject = ['$http', 'rx'];
 
-export default angular.module('tagsInputService', [])
+export default angular.module('tagsInputServiceRx', [])
     .service(serviceName, tagsService);

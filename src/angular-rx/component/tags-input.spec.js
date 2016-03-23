@@ -21,14 +21,15 @@ describe('Directive: tagsInput', function() {
     id: 4,
     name: 'character'
   }];
+  const createOneStream = new Rx.Subject();
   const mockedTagsService = {
     getAllTags: () => new Rx.BehaviorSubject({ data: angular.copy(tagsArray) }),
-    createOne: new Rx.Subject
+    createOne: () => createOneStream
   };
 
   beforeEach(window.module('templates'));
   beforeEach(window.module('rx'));
-  beforeEach(module('tagsInputComponent', {
+  beforeEach(window.module(componentModule.name, {
     tagsService: mockedTagsService
   }));
 
@@ -229,7 +230,7 @@ describe('Directive: tagsInput', function() {
     });
 
     describe('Type "newTag" in input', function() {
-      let newTag = {
+      const newTag = {
         id: 5,
         name: 'newtag'
       };
@@ -245,7 +246,7 @@ describe('Directive: tagsInput', function() {
       describe('click enter', function() {
         beforeEach(function() {
           triggerKeyDown(ENTER_KEY);
-          mockedTagsService.createOne.onNext({ data: newTag });
+          createOneStream.onNext(newTag);
           $scope.$digest();
           $timeout.flush();
         });

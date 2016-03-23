@@ -6,6 +6,8 @@ module.exports = function(config) {
       'node_modules/jquery/dist/jquery.js',
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/rx/dist/rx.all.js',
+      'node_modules/rx-angular/dist/rx.angular.js',
       'src/**/*.jade',
       'src/**/*.spec.js'
     ],
@@ -58,7 +60,7 @@ module.exports = function(config) {
     singleRun: false,
     ngJade2JsPreprocessor: {
       moduleName: 'templates',
-      stripPrefix: 'src/angular/'
+      stripPrefix: 'src/'
     }
   });
 };

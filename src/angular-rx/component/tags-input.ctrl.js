@@ -38,7 +38,7 @@ function tagsInputController($scope, $timeout, rx, observeOnScope, tagsInputServ
     })
   });
 
-  this.search = (searchText) => tagsInputService.search(searchText);
+  this.search = () => tagsInputService.search(this.searchText);
   this.checkKeyDown = (event) => tagsInputService.keyDown(event);
 
   this.removeTag = (tag) => tagsInputService.removeTag(tag);

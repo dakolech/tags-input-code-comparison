@@ -6,7 +6,7 @@
         span &nbsp;
           b.remove(ng-click="tagsInputVM.removeTag(selectedTag)") x
     input.form-control(type="text", placeholder="{{tagsInputVM.placeholder}}", name="tag", ng-keydown="tagsInputVM.checkKeyDown($event)",
-        ng-model="tagsInputVM.searchText", ng-change="tagsInputVM.search(tagsInputVM.searchText)", autocomplete="off", special-chars)
+        ng-model="tagsInputVM.searchText", ng-change="tagsInputVM.search(tagsInputVM.searchText)", autocomplete="off")
     ul.list-group.suggestions-list
       li.list-group-item.suggested-tag(ng-repeat="suggestion in tagsInputVM.suggestions track by suggestion.id",
           ng-click="tagsInputVM.addSelectedTag(tagsInputVM.suggestions[tagsInputVM.selectedIndex])", ng-mouseover="tagsInputVM.selectedIndex = $index",

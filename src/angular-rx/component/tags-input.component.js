@@ -7,7 +7,7 @@ const tagsInput = {
   restrict: 'AE',
   replace: true,
   scope: {},
-  templateUrl: 'component/tags-input.html',
+  templateUrl: 'angular-rx/component/tags-input.html',
   bindings: {
     ngModel: '=?',
     name: '@?',
@@ -18,7 +18,7 @@ const tagsInput = {
   controller: 'tagsInputController'
 };
 
-export default angular.module('tagsInputComponent', [])
+export default angular.module('tagsInputComponentRx', [])
   .controller('tagsInputController', tagsInputController)
   .service('tagsInputService', tagsInputService)
   .component(componentName, tagsInput);

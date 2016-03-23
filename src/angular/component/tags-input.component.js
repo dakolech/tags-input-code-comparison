@@ -6,7 +6,7 @@ const tagsInput = {
   restrict: 'AE',
   replace: true,
   scope: {},
-  templateUrl: 'component/tags-input.html',
+  templateUrl: 'angular/component/tags-input.html',
   bindings: {
     ngModel: '=?',
     name: '@?',
