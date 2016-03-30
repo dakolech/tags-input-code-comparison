@@ -1,3 +1,2 @@
-import config from './server/config';
-import routes from './server/routes';
-
+import './server/config';
+import './server/routes';
