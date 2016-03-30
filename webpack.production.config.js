@@ -4,6 +4,9 @@ const sharedWebpack = require('./webpack.shared');
 module.exports = {
   entry: sharedWebpack.entry(),
   output: sharedWebpack.output,
+  module: {
+    loaders: sharedWebpack.loaders
+  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -14,8 +17,5 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
-  ],
-  module: {
-    loaders: sharedWebpack.loaders
-  }
+  ]
 };

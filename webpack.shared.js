@@ -9,7 +9,7 @@ module.exports = {
       'angular-rx': [
         path.join(__dirname, 'src/angular-rx/tags-input.module.js')
       ]
-    }
+    };
 
     if (env === 'dev') {
       for (const key in entries) {
@@ -29,13 +29,42 @@ module.exports = {
   },
 
   loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
-      },
-    ],
-}
+    {
+      test: /\.js?$/,
+      include: path.join(`${__dirname}/src`),
+      loader: 'babel',
+      query: {
+        presets: ['es2015']
+      }
+    }, {
+      test: /\.jade$/,
+      loader: 'jade',
+      include: path.join(`${__dirname}/src`)
+    }, {
+      test: /\.scss$/,
+      loader: 'style!css!postcss!resolve-url!sass?sourceMap',
+      include: path.join(`${__dirname}/css`)
+    }, {
+      test: /\.css$/,
+      loader: 'style!css!resolve-url'
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'file'
+    }, {
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/font-woff"
+    }, {
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/font-woff2"
+    }, {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/octet-stream"
+    }, {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "file"
+    }, {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=image/svg+xml"
+    }
+  ]
+};

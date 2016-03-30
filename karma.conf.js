@@ -1,3 +1,5 @@
+const sharedWebpack = require('./webpack.shared');
+
 module.exports = function(config) {
   config.set({
     basePath: '',
@@ -34,16 +36,7 @@ module.exports = function(config) {
           exclude: /(node_modules)/,
           loader: 'isparta'
         }],
-        loaders: [
-          {
-            test: /\.js?$/,
-            exclude: /(node_modules)/,
-            loader: 'babel',
-            query: {
-              presets: ['es2015']
-            }
-          },
-        ]
+        loaders: sharedWebpack.loaders
       }
     },
     webpackMiddleware: {
