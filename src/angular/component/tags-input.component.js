@@ -1,6 +1,6 @@
 import tagsInputController from './tags-input.ctrl';
 
-import template from 'jade!./tags-input.jade';
+import template from './tags-input.jade';
 
 const componentName = 'tagsInput';
 
@@ -16,9 +16,8 @@ const tagsInput = {
     ngChange: '&?'
   },
   controllerAs: 'tagsInputVM',
-  controller: 'tagsInputController'
+  controller: tagsInputController
 };
 
 export default angular.module('tagsInputComponent', [])
-  .controller('tagsInputController', tagsInputController)
   .component(componentName, tagsInput);
