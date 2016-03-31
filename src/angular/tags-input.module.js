@@ -1,4 +1,4 @@
-import '../shared';
+import '../shared/app';
 
 import 'angular';
 

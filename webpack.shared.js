@@ -8,6 +8,9 @@ module.exports = {
       ],
       'angular-rx': [
         path.join(__dirname, 'src/angular-rx/tags-input.module.js')
+      ],
+      shared: [
+        path.join(__dirname, 'src/shared/app.js')
       ]
     };
 
@@ -30,7 +33,7 @@ module.exports = {
 
   loaders: [
     {
-      test: /\.js?$/,
+      test: /\.js$/,
       include: path.join(`${__dirname}/src`),
       loader: 'babel',
       query: {
