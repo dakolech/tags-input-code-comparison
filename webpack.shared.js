@@ -1,4 +1,5 @@
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: (env) => {
@@ -46,7 +47,7 @@ module.exports = {
     }, {
       test: /\.scss$/,
       loader: 'style!css!postcss!resolve-url!sass?sourceMap',
-      include: path.join(`${__dirname}/css`)
+      include: path.join(`${__dirname}/src`)
     }, {
       test: /\.css$/,
       loader: 'style!css!resolve-url'
@@ -69,5 +70,8 @@ module.exports = {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
       loader: "url?limit=10000&mimetype=image/svg+xml"
     }
-  ]
+  ],
+  postcss: function() {
+    return [autoprefixer];
+  },
 };

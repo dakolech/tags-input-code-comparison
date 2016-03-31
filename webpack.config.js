@@ -12,5 +12,6 @@ export default {
   ],
   module: {
     loaders: sharedWebpack.loaders
-  }
+  },
+  postcss: sharedWebpack.postcss
 };
