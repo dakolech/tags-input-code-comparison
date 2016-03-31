@@ -1,3 +1,20 @@
 extends ./layout.jade
 block body
-  h1 Tags input code comparison
+  .main.shared
+    h1.title Tags input code comparison
+    .main-table
+      .row
+        a.col-lg-6(href='angular/')
+          .row
+            img(src='angular.png')
+          .row
+            h4 AngularJS
+        a.col-lg-6(href='angular/')
+          .row.angular-rxjs
+            .container
+              img.angular.back(src='angular.png')
+              // img.angular.front(src='angular.png')
+              img.rxjs.back(src='rxjs.png')
+              img.rxjs.front(src='rxjs.png')
+          .row
+            h4 AngularJS + RxJS
