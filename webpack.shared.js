@@ -12,6 +12,9 @@ module.exports = {
       ],
       shared: [
         path.join(__dirname, 'src/shared/app.js')
+      ],
+      vanillajs: [
+        path.join(__dirname, 'src/vanillajs/app.js')
       ]
     };
 
