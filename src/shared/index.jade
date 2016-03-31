@@ -1,12 +1,15 @@
 extends ./layout.jade
 block body
+  svg(width="0" height="0")
+    clipPath(id='angularClipPolygon')
+      polygon(points="100 0, 122 0, 172 50, 178 72, 164 90, 62 96, 6 106, 2 170, 0 78, 0 10")
   .main.shared
     h1.title Tags input code comparison
     .main-table
       .row
         a.col-lg-6(href='angular/')
           .row
-            img(src='angular.png')
+            img.angular(src='angular.png')
           .row
             h4 AngularJS
         a.col-lg-6(href='angular-rx/')
