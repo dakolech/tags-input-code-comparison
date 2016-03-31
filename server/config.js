@@ -36,6 +36,8 @@ if (isDeveloping) {
 }
 app.use(bodyParser.json());
 
+app.use(express.static('src/shared/images'));
+
 app.set('views', path.join(__dirname, '../'));
 app.set('view engine', 'jade');
 
