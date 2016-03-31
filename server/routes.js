@@ -7,5 +7,5 @@ import angularRxRoutes from './angular-rx/angular-rx.routes';
 /* eslint-enable no-unused-vars */
 
 app.get('/', (req, res) =>
-  res.render('index')
+  res.render('src/shared/index')
 );
