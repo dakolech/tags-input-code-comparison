@@ -1,0 +1,47 @@
+.main {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    text-align: center;
+}
+
+.back-button {
+  margin: 20px;
+  width: 100px;
+}
+
+.tags-input {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+.tags-wrapper {
+  .tags-container {
+    margin-bottom: 10px;
+
+    .tag {
+      margin: 5px;
+
+      b.fa.fa-times.cross {
+        cursor: pointer;
+      }
+    }
+  }
+  ul.suggestions-list {
+    width: 200px;
+
+    li.suggested-tag {
+      cursor: pointer;
+    }
+  }
+}
+
+
+.remove {
+    cursor: pointer;
+}
