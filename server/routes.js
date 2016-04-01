@@ -1,11 +1,20 @@
 import app from './app';
 
-/* eslint-disable no-unused-vars */
-import tagsRoutes from './tags/tags.routes';
-import angularRoutes from './angular/angular.routes';
-import angularRxRoutes from './angular-rx/angular-rx.routes';
-/* eslint-enable no-unused-vars */
+import './tags/tags.routes';
 
 app.get('/', (req, res) =>
   res.render('src/shared/index')
 );
+
+app.get('/angular', (req, res) =>
+  res.render('src/angular/index')
+);
+
+app.get('/angular-rx', (req, res) =>
+  res.render('src/angular-rx/index')
+);
+
+app.get('/angular2', (req, res) =>
+  res.render('src/angular2/index')
+);
+
