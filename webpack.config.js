@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import sharedWebpack from './webpack.shared';
 
 export default {
+  devtool: 'source-map',
   cache: true,
   debug: true,
   watch: true,
