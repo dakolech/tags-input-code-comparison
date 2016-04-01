@@ -40,11 +40,7 @@ module.exports = {
     {
       test: /\.js$/,
       include: path.join(`${__dirname}/src`),
-      loader: 'babel',
-      query: {
-        presets: ['es2015'],
-        plugins: ['transform-decorators-legacy']
-      }
+      loader: 'babel'
     }, {
       test: /\.jade$/,
       loader: 'jade',
