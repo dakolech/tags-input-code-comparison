@@ -1,0 +1,14 @@
+.tags-input
+  form(name="tags-input").tags-wrapper
+    // .tags-container
+    //   .tag.label.label-primary(ng-repeat="selectedTag in tagsInputVM.ngModel track by selectedTag.id")
+    //     span.tag-name(ng-bind="selectedTag.name")
+    //     span &nbsp;
+    //       b.remove(ng-click="tagsInputVM.removeTag(selectedTag)") x
+    input.form-control(type="text", placeholder="", name="tag", autocomplete="off")
+    // ul.list-group.suggestions-list
+    //   li.list-group-item.suggested-tag(ng-repeat="suggestion in tagsInputVM.suggestions track by suggestion.id",
+    //       ng-click="tagsInputVM.addSelectedTag(tagsInputVM.suggestions[tagsInputVM.selectedIndex])", ng-mouseover="tagsInputVM.selectedIndex = $index",
+    //       ng-class="{ active : tagsInputVM.selectedIndex === $index || \
+    //           suggestion.name.toLowerCase() === tagsInputVM.searchText.toLowerCase() }",
+    //       ng-bind="suggestion.name")
