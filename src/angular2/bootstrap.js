@@ -7,8 +7,11 @@ import 'es6-promise';
 import 'reflect-metadata';
 import { bootstrap } from 'angular2/platform/browser';
 import App from './app';
-import { HTTP_BINDINGS } from "angular2/http";
+import { HTTP_BINDINGS } from 'angular2/http';
+
+import TagsService from './service/tags.service';
 
 bootstrap(App, [
-  HTTP_BINDINGS
+  HTTP_BINDINGS,
+  TagsService
 ]);

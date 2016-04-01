@@ -1,22 +1,21 @@
 import { Component } from 'angular2/core';
 
-import TagsService from '../service/tags.service';
+import TagsInputService from './tags-input.service';
 
 import template from './tags-input.jade';
 
 @Component({
   selector: 'tags-input',
   template: template(),
-  providers: [TagsService]
+  providers: [TagsInputService]
 })
 
 export default class TagsInput {
   constructor(
-    tagsService: TagsService
+    tagsInputService: TagsInputService
   ) {
     this.placeholder = 'tags';
-    tagsService.getTags().subscribe((tags) => {
-      this.tags = tags;
-    });
+    tagsInputService.init();
+    this.tagsInputService = tagsInputService;
   }
 };
