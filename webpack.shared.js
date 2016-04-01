@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
@@ -9,6 +10,9 @@ module.exports = {
       ],
       'angular-rx': [
         path.join(__dirname, 'src/angular-rx/tags-input.module.js')
+      ],
+      angular2: [
+        path.join(__dirname, 'src/angular2/bootstrap.js')
       ],
       shared: [
         path.join(__dirname, 'src/shared/app.js')
@@ -38,7 +42,8 @@ module.exports = {
       include: path.join(`${__dirname}/src`),
       loader: 'babel',
       query: {
-        presets: ['es2015']
+        presets: ['es2015'],
+        plugins: ['transform-decorators-legacy']
       }
     }, {
       test: /\.jade$/,
@@ -71,7 +76,8 @@ module.exports = {
       loader: "url?limit=10000&mimetype=image/svg+xml"
     }
   ],
+
   postcss: function() {
     return [autoprefixer];
-  },
+  }
 };
