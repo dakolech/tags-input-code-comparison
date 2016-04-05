@@ -1,14 +1,15 @@
 .tags-input
   form.tags-wrapper
     .tags-container
-      // .tag.label.label-primary(ng-repeat="selectedTag in tagsInputVM.ngModel track by selectedTag.id")
-      //   span.tag-name(ng-bind="selectedTag.name")
-      //   span &nbsp;
-      //     b.remove(ng-click="tagsInputVM.removeTag(selectedTag.id)") x
-    input.form-control(type="text", placeholder="{{placeholder}}", name="tag" autocomplete="off")
-    // ul.list-group.suggestions-list
-    //   li.list-group-item.suggested-tag(ng-repeat="suggestion in tagsInputVM.suggestions track by suggestion.id",
-    //       ng-click="tagsInputVM.addToSelectedTags(suggestion.id)", ng-mouseover="tagsInputVM.selectedIndex = $index",
-    //       ng-class="{ active : tagsInputVM.selectedIndex === $index || \
-    //           suggestion.name.toLowerCase() === tagsInputVM.searchText.toLowerCase() }",
-    //       ng-bind="suggestion.name")
+      .tag.label.label-primary(*ngFor="#selectedTag of selectedTags")
+        span.tag-name {{ selectedTag.name }}
+        span &nbsp;
+          b.remove((click)="removeTag(selectedTag)") x
+    input.form-control(type="text", placeholder="{{placeholder}}", name="tag" autocomplete="off",
+        (input)='search($event.target.value)', (keydown)='checkKeyDown($event)', [(ngModel)]="searchText")
+    ul.list-group.suggestions-list
+      li.list-group-item.suggested-tag(*ngFor="#suggestion of suggestions; #index = index",
+          [ngClass]="{ active: selectedIndex === index || \
+              suggestion.name.toLowerCase() === searchText.toLowerCase() }",
+              (click)="addSelectedTag(suggestion)",
+              (mouseover)="selectedIndex = index") {{ suggestion.name }}

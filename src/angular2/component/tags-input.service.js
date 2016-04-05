@@ -1,6 +1,10 @@
 import TagsService from '../service/tags.service';
 import Rx from 'rxjs/Rx';
 
+const DOWN_KEY = 40;
+const UP_KEY = 38;
+const ENTER_KEY = 13;
+
 export default class TagsInputService {
   constructor(tagsService: TagsService) {
     this.tagsService = tagsService;
@@ -101,16 +105,16 @@ export default class TagsInputService {
       .withLatestFrom(selectedTag, (event, tag) => tag)
       .partition((tag) => !!tag)
 
-    // enterEventsWithTag[1]
-    //   .withLatestFrom(this._searchText, (event, text) => text)
-    //   .switchMap(this.tagsService.createOne.bind(this.tagsService))
-    //   .withLatestFrom(this._selectedTags, (tag, tags) => {
-    //     tags.push(tag);
-    //     return tags;
-    //   })
-    //   .subscribe((tags) => {
-    //     this._selectedTags.next(tags);
-    //   })
+    enterEventsWithTag[1]
+      .withLatestFrom(this._searchText, (event, text) => text)
+      .switchMap(this.tagsService.createOne.bind(this.tagsService))
+      .withLatestFrom(this._selectedTags, (tag, tags) => {
+        tags.push(tag);
+        return tags;
+      })
+      .subscribe((tags) => {
+        this._selectedTags.next(tags);
+      })
 
     enterEventsWithTag[0]
       .filter((tag) => !!tag)
