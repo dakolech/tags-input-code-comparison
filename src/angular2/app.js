@@ -22,6 +22,5 @@ export default class App {
 
   changed(tags) {
     this.tags = tags;
-    console.log(this.tags);
   }
 };
