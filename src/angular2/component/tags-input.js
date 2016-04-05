@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, ChangeDetectionStrategy, Input } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 
 import TagsInputService from './tags-input.service';
@@ -9,30 +9,35 @@ import template from './tags-input.jade';
   selector: 'tags-input',
   template: template(),
   providers: [TagsInputService],
-  directives: [CORE_DIRECTIVES]
+  directives: [CORE_DIRECTIVES],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  inputs: ['selectedTags', 'placeholder', 'changed']
 })
 
 export default class TagsInput {
   constructor(
     tagsInputService: TagsInputService
   ) {
-    this.placeholder = 'tags';
     this.searchText = '';
-    tagsInputService.init();
+    this.tagsInputService = tagsInputService;
+  }
 
-    tagsInputService.suggestions.subscribe((sugg) => this.suggestions = sugg);
-    tagsInputService.selectedIndex.subscribe((index) => this.selectedIndex = index);
+  ngOnInit() {
+    this.tagsInputService.init(this.selectedTags);
 
-    tagsInputService.selectedIndex
+    this.suggestions = this.tagsInputService.suggestions;
+
+    this.tagsInputService.selectedIndex.subscribe((index) => this.selectedIndex = index);
+
+    this.tagsInputService.selectedIndex
       .filter((index) => !!this.suggestions[index])
       .subscribe((index) => this.searchText = this.suggestions[index].name)
 
-    tagsInputService.selectedTags.subscribe((tags) => {
+    this.tagsInputService.selectedTags.subscribe((tags) => {
       this.searchText = '';
       this.selectedTags = tags;
+      this.changed(this.selectedTags);
     });
-
-    this.tagsInputService = tagsInputService;
   }
 
   search(searchText) {

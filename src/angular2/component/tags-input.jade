@@ -8,7 +8,7 @@
     input.form-control(type="text", placeholder="{{placeholder}}", name="tag" autocomplete="off",
         (input)='search($event.target.value)', (keydown)='checkKeyDown($event)', [(ngModel)]="searchText")
     ul.list-group.suggestions-list
-      li.list-group-item.suggested-tag(*ngFor="#suggestion of suggestions; #index = index",
+      li.list-group-item.suggested-tag(*ngFor="#suggestion of suggestions | async; #index = index",
           [ngClass]="{ active: selectedIndex === index || \
               suggestion.name.toLowerCase() === searchText.toLowerCase() }",
               (click)="addSelectedTag(suggestion)",

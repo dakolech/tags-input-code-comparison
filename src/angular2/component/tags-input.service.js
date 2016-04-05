@@ -23,14 +23,14 @@ export default class TagsInputService {
     this._addRemTags();
   }
 
-  init(ngModel) {
+  init(inputTags) {
     this.tagsService.getTags()
       .subscribe((tags) => {
         this._allTags = tags.filter((item) => {
-          return !(ngModel || []).find((ngModelItem) => ngModelItem.id === item.id);
+          return !(inputTags || []).find((inputTagsItem) => inputTagsItem.id === item.id);
         });
       });
-    this._selectedTags.next(ngModel || []);
+    this._selectedTags.next(inputTags || []);
   }
 
   get suggestions() {
