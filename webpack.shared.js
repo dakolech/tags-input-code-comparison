@@ -14,6 +14,9 @@ module.exports = {
       angular2: [
         path.join(__dirname, 'src/angular2/bootstrap.js')
       ],
+      'angular2-ts': [
+        path.join(__dirname, 'src/angular2-ts/bootstrap.ts')
+      ],
       shared: [
         path.join(__dirname, 'src/shared/app.js')
       ]
@@ -41,6 +44,10 @@ module.exports = {
       test: /\.js$/,
       include: path.join(`${__dirname}/src`),
       loader: 'babel'
+    }, {
+      test: /\.ts$/,
+      loader: 'awesome-typescript-loader',
+      include: path.join(`${__dirname}/src`)
     }, {
       test: /\.jade$/,
       loader: 'jade',
