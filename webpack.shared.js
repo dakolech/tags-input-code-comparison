@@ -47,7 +47,8 @@ module.exports = {
     }, {
       test: /\.ts$/,
       loader: 'awesome-typescript-loader',
-      include: path.join(`${__dirname}/src`)
+      include: path.join(`${__dirname}/src`),
+      exclude: /node_modules\/rxjs$/
     }, {
       test: /\.jade$/,
       loader: 'jade',
