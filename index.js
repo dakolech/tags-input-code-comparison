@@ -1,2 +1,2 @@
-import './server/config';
-import './server/routes';
+require('./server/config');
+require('./server/routes');
