@@ -21,5 +21,3 @@ app.get('/angular2', (req, res) =>
 app.get('/angular2-ts', (req, res) =>
   res.render('src/angular2-ts/index')
 );
-
-
