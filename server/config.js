@@ -1,16 +1,16 @@
-import app from './app';
+const app = require('./app');
 
-import express from 'express';
-import webpack from 'webpack';
-import webpackMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config.js';
+const express = require('express');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('../webpack.config.js');
 
-import path from 'path';
-import bodyParser from 'body-parser';
+const path = require('path');
+const bodyParser = require('body-parser');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 4000 : process.env.PORT;
+const port = isDeveloping ? 4001 : process.env.PORT;
 
 if (isDeveloping) {
   const compiler = webpack(config);

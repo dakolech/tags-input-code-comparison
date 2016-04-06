@@ -1,9 +1,9 @@
-import app from '../app';
+const app = require('../app');
 
-import path from 'path';
-import fs from 'fs';
+const path = require('path');
+const fs = require('fs');
 
-import tagsFile from '../../tmp/tags/all';
+const tagsFile = require('../../tmp/tags/all');
 
 const tagsFileName = '../../tmp/tags/all.json';
 

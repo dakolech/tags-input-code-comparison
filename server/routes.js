@@ -1,6 +1,6 @@
-import app from './app';
+const app = require('./app');
 
-import './tags/tags.routes';
+require('./tags/tags.routes');
 
 app.get('/', (req, res) =>
   res.render('src/shared/index')
@@ -17,4 +17,9 @@ app.get('/angular-rx', (req, res) =>
 app.get('/angular2', (req, res) =>
   res.render('src/angular2/index')
 );
+
+app.get('/angular2-ts', (req, res) =>
+  res.render('src/angular2-ts/index')
+);
+
 
