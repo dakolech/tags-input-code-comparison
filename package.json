@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/dakolech/tags-input-code-comparison#readme",
   "scripts": {
-    "build": "rimraf dist && webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "build": "rimraf dist && webpack --config ./webpack.production.config.js",
     "lint": "eslint **/*.js",
     "prestart": "npm run build",
-    "start": "node index.js",
+    "start": "node --max_old_space_size=960 index.js",
     "dev": "nodemon --exec \"node index.js\"",
     "test": "./node_modules/karma/bin/karma start",
     "test-once": "npm run test -- --single-run",
