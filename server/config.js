@@ -10,7 +10,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 4001 : process.env.PORT;
+const port = process.env.PORT || 4001;
 
 if (isDeveloping) {
   const compiler = webpack(config);
