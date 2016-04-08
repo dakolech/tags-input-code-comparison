@@ -47,7 +47,7 @@ module.exports = {
     }, {
       test: /\.ts$/,
       loader: 'babel!awesome-typescript',
-      include: path.join(`${__dirname}/src`),
+      include: path.join(`${__dirname}/src/angular2-ts`),
       exclude: /node_modules\/rxjs$/
     }, {
       test: /\.jade$/,
