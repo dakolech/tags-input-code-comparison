@@ -46,7 +46,7 @@ module.exports = {
       loader: 'babel'
     }, {
       test: /\.ts$/,
-      loader: 'awesome-typescript-loader',
+      loader: 'babel!awesome-typescript',
       include: path.join(`${__dirname}/src`),
       exclude: /node_modules\/rxjs$/
     }, {
