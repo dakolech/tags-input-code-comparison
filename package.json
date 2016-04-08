@@ -18,12 +18,18 @@
   "homepage": "https://github.com/dakolech/tags-input-code-comparison#readme",
   "scripts": {
     "build": "rimraf dist && webpack --config ./webpack.production.config.js",
-    "lint": "eslint **/*.js",
+
+    "lint": "npm run eslint && npm run tslint",
+      "eslint": "eslint 'src/**/*.js'",
+      "tslint": "tslint 'src/**/*.ts'",
+
     "start": "node index.js",
     "dev": "nodemon --exec \"node index.js\"",
+
     "test": "./node_modules/karma/bin/karma start",
-    "test-once": "npm run test -- --single-run",
-    "test-travis": "./node_modules/karma/bin/karma start --single-run --browsers=Chrome_travis_ci,Firefox",
+      "test-once": "npm run test -- --single-run",
+      "test-travis": "./node_modules/karma/bin/karma start --single-run --browsers=Chrome_travis_ci,Firefox",
+
     "travis": "npm run lint && npm run test-travis",
     "push": "npm run lint && npm run test-once && git push"
   },
@@ -73,7 +79,8 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.5.2",
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.2",
+    "codelyzer": "0.0.12",
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-config-angular": "^0.5.0",
@@ -81,8 +88,8 @@
     "eslint-plugin-react": "^4.2.3",
     "isparta-loader": "^2.0.0",
     "jasmine": "^2.4.1",
-    "jquery": "^2.2.2",
     "jasmine-core": "^2.4.1",
+    "jquery": "^2.2.2",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
     "karma-cli": "^0.1.2",
@@ -90,6 +97,8 @@
     "karma-jasmine": "^0.3.8",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "tslint": "^3.7.1",
+    "tslint-eslint-rules": "^1.2.0"
   }
 }
