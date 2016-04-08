@@ -14,9 +14,9 @@ import TagsService from './service/tags.service';
 
 
 class MyRequestOptions extends BaseRequestOptions {
-  constructor () {
+  constructor() {
     super();
-    this.headers.append('Content-Type','application/json;charset=UTF-8');
+    this.headers.append('Content-Type', 'application/json;charset=UTF-8');
   }
 }
 

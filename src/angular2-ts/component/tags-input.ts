@@ -40,7 +40,7 @@ export default class TagsInput {
 
     this.tagsInputService.selectedIndex
       .filter((index) => !!this.suggestions[index])
-      .subscribe((index) => this.searchText = this.suggestions[index].name)
+      .subscribe((index) => this.searchText = this.suggestions[index].name);
 
     this.tagsInputService.selectedTags.subscribe((tags) => {
       this.searchText = '';
@@ -50,18 +50,18 @@ export default class TagsInput {
   }
 
   search(searchText) {
-    this.tagsInputService.search(searchText)
+    this.tagsInputService.search(searchText);
   }
 
   checkKeyDown(event) {
-    this.tagsInputService.keyDown(event)
+    this.tagsInputService.keyDown(event);
   }
 
   removeTag(tag) {
-    this.tagsInputService.removeTag(tag)
+    this.tagsInputService.removeTag(tag);
   }
 
   addSelectedTag(tag) {
-    this.tagsInputService.addTag(tag)
+    this.tagsInputService.addTag(tag);
   }
 };

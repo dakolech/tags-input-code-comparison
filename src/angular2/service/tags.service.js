@@ -11,7 +11,7 @@ export default class TagsService {
   }
 
   createOne(tag) {
-    return this.http.post('/tags', JSON.stringify({name: tag} ))
+    return this.http.post('/tags', JSON.stringify({ name: tag }))
       .map((resp: Response) => resp.json());
   }
 }

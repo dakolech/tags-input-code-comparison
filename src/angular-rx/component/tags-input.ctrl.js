@@ -18,24 +18,30 @@ function tagsInputController($scope, $timeout, rx, observeOnScope, tagsInputServ
     .filter((item) => !!item.newValue && typeof item.newValue === 'function');
 
   ngChangeObserver.first().subscribe(() => {
-    const ngModelObserver = observeOnScope($scope, formName, true)
+    observeOnScope($scope, formName, true)
       .subscribe(() => {
         this.ngChange();
       });
   });
 
-  tagsInputService.suggestions.subscribe((sugg) => this.suggestions = sugg);
-  tagsInputService.selectedIndex.subscribe((index) => this.selectedIndex = index);
+  tagsInputService.suggestions.subscribe((sugg) => {
+    this.suggestions = sugg;
+  });
+  tagsInputService.selectedIndex.subscribe((index) => {
+    this.selectedIndex = index;
+  });
 
   tagsInputService.selectedIndex
     .filter((index) => !!this.suggestions[index])
-    .subscribe((index) => this.searchText = this.suggestions[index].name)
+    .subscribe((index) => {
+      this.searchText = this.suggestions[index].name;
+    });
 
   tagsInputService.selectedTags.subscribe((tags) => {
     $timeout(() => {
       this.searchText = '';
       this.ngModel = tags;
-    })
+    });
   });
 
   this.search = () => tagsInputService.search(this.searchText);

@@ -1,11 +1,11 @@
 const DOWN_KEY = 40;
 const UP_KEY = 38;
-const  ENTER_KEY = 13;
+const ENTER_KEY = 13;
 
 function tagsInputController($scope, tagsService) {
-  let formName = this.name ? this.name : 'form';
+  const formName = this.name ? this.name : 'form';
 
-  let waitForForm = $scope.$watch(formName, (newVal) => {
+  const waitForForm = $scope.$watch(formName, (newVal) => {
     /* istanbul ignore else  */
     if (newVal) {
       this.form = $scope[formName];
@@ -21,7 +21,7 @@ function tagsInputController($scope, tagsService) {
     this.allTags = resp.data;
     if (this.ngModel.length > 0) {
       this.allTags = this.allTags.filter((item) => {
-        let foundItem = this.ngModel.find((innerItem) => innerItem.id === item.id);
+        const foundItem = this.ngModel.find((innerItem) => innerItem.id === item.id);
         return !foundItem;
       });
     }
@@ -54,17 +54,15 @@ function tagsInputController($scope, tagsService) {
         if (this.selectedIndex !== this.suggestions.length - 1) {
           this.selectedIndex++;
         }
-      }
-      else if (event.keyCode === UP_KEY) {
+      } else if (event.keyCode === UP_KEY) {
         event.preventDefault();
         if (~(this.selectedIndex - 1)) {
           this.selectedIndex--;
         }
-      }
-      else if (event.keyCode === ENTER_KEY) {
+      } else if (event.keyCode === ENTER_KEY) {
         event.preventDefault();
         if (this.form.$valid) {
-          if (~this.selectedIndex){
+          if (~this.selectedIndex) {
             this.addToSelectedTags(this.suggestions[this.selectedIndex].id);
           } else {
             this.addNewTag();
@@ -72,7 +70,7 @@ function tagsInputController($scope, tagsService) {
         }
       }
     }
-  }
+  };
 
   $scope.$watch('tagsInputVM.selectedIndex', (val) => {
     if (val !== -1) {
@@ -81,12 +79,11 @@ function tagsInputController($scope, tagsService) {
   });
 
   function moveFromOneArrayToAnother(fromArray, toArray, id) {
-    let
-      foundIndex,
-      foundItem = fromArray.find((item, index) => {
-        foundIndex = index;
-        return item.id === id;
-      });
+    let foundIndex;
+    const foundItem = fromArray.find((item, index) => {
+      foundIndex = index;
+      return item.id === id;
+    });
     toArray.push(foundItem);
     fromArray.splice(foundIndex, 1);
   }
@@ -95,14 +92,14 @@ function tagsInputController($scope, tagsService) {
     moveFromOneArrayToAnother(this.allTags, this.ngModel, id);
     this.searchText = '';
     this.suggestions = [];
-  }
+  };
 
   this.removeTag = (id) => {
     moveFromOneArrayToAnother(this.ngModel, this.allTags, id);
-  }
+  };
 
   this.addNewTag = () => {
-    let isTag = this.allTags.find((item) => item.name.toLowerCase() === this.searchText.toLowerCase());
+    const isTag = this.allTags.find((item) => item.name.toLowerCase() === this.searchText.toLowerCase());
     if (!!isTag) {
       this.addToSelectedTags(isTag.id);
     } else {
@@ -111,7 +108,7 @@ function tagsInputController($scope, tagsService) {
         this.searchText = '';
       });
     }
-  }
+  };
 }
 
 tagsInputController.$inject = ['$scope', 'tagsService'];

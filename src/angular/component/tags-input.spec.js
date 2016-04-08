@@ -4,10 +4,14 @@ const DOWN_KEY = 40;
 const UP_KEY = 38;
 const ENTER_KEY = 13;
 const CTRL_KEY = 17;
-const BACKSPACE_KEY = 8;
 
 describe('Directive: tagsInput', () => {
-  let $compile, element, $rootScope, $scope, tagsInputController;
+  let $compile;
+  let element;
+  let $rootScope;
+  let $scope;
+  let tagsInputController;
+
   const tagsArray = [{
     id: 1,
     name: 'shopping'
@@ -27,6 +31,36 @@ describe('Directive: tagsInput', () => {
   };
   let successCallback;
   let successCallbackCreate;
+
+  function compileElement(tags, name, someFunction) {
+    inject(function(_$compile_, _$rootScope_) {
+      $compile = _$compile_;
+      $rootScope = _$rootScope_;
+      $scope = $rootScope;
+      $scope.tags = tags;
+      $scope.name = name;
+      $scope.someFunction = someFunction;
+      const ngChange = someFunction ? 'ng-change="someFunction()"' : '';
+      element = angular.element(`<tags-input
+        ng-model="tags"
+        name="{{ name }}"
+        ${ngChange}
+        ></tags-input>`);
+      $compile(element)($scope);
+      angular.element(document.body).append(element);
+      $scope.$digest();
+      tagsInputController = element.controller('tagsInput');
+    });
+  }
+
+  function triggerKeyDown(keyCode) {
+    const event = {
+      preventDefault: angular.noop,
+      keyCode: keyCode
+    };
+    tagsInputController.checkKeyDown(event);
+    $scope.$digest();
+  }
 
   beforeEach(window.module(componentModule.name, {
     tagsService: mockedTagsService
@@ -349,34 +383,4 @@ describe('Directive: tagsInput', () => {
       });
     });
   });
-
-  function compileElement(tags, name, someFunction) {
-    inject(function(_$compile_, _$rootScope_) {
-      $compile = _$compile_;
-      $rootScope = _$rootScope_;
-      $scope = $rootScope;
-      $scope.tags = tags;
-      $scope.name = name;
-      $scope.someFunction = someFunction;
-      const ngChange = someFunction ? 'ng-change="someFunction()"' : '';
-      element = angular.element(`<tags-input
-        ng-model="tags"
-        name="{{ name }}"
-        ${ngChange}
-        ></tags-input>`);
-      $compile(element)($scope);
-      angular.element(document.body).append(element);
-      $scope.$digest();
-      tagsInputController = element.controller('tagsInput');
-    });
-  }
-
-  function triggerKeyDown(keyCode) {
-    const event = {
-      preventDefault: angular.noop,
-      keyCode: keyCode
-    };
-    tagsInputController.checkKeyDown(event);
-    $scope.$digest();
-  };
 });

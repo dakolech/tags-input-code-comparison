@@ -82,14 +82,14 @@ export default class TagsInputService {
     const eventsWithSearchText = this._searchText
       .map((searchText) => !!searchText ? this._eventsStream : Observable.empty())
       .switch()
-      .filter((event: any) => !!event && !!event.keyCode)
+      .filter((event: any) => !!event && !!event.keyCode);
 
     const keyDownEvents = eventsWithSearchText
-      .filter((event: any) => event.keyCode === DOWN_KEY)
+      .filter((event: any) => event.keyCode === DOWN_KEY);
     const keyUpEvents = eventsWithSearchText
-      .filter((event: any) => event.keyCode === UP_KEY)
+      .filter((event: any) => event.keyCode === UP_KEY);
     const enterEvents = eventsWithSearchText
-      .filter((event: any) => event.keyCode === ENTER_KEY)
+      .filter((event: any) => event.keyCode === ENTER_KEY);
 
     Observable
       .merge(
@@ -97,14 +97,14 @@ export default class TagsInputService {
         keyUpEvents,
         enterEvents
       )
-      .subscribe((event: Event) => event.preventDefault())
+      .subscribe((event: Event) => event.preventDefault());
 
     const selectedTag = this._selectedIndex
-      .combineLatest(this.suggestions, (index, sugg) => sugg[index])
+      .combineLatest(this.suggestions, (index, sugg) => sugg[index]);
 
     const enterEventsWithTag = enterEvents
       .withLatestFrom(selectedTag, (event, tag) => tag)
-      .partition((tag) => !!tag)
+      .partition((tag) => !!tag);
 
     enterEventsWithTag[1]
       .withLatestFrom(this._searchText, (event, text) => text)
@@ -115,7 +115,7 @@ export default class TagsInputService {
       })
       .subscribe((tags) => {
         this._selectedTags.next(tags);
-      })
+      });
 
     enterEventsWithTag[0]
       .filter((tag) => !!tag)
@@ -128,7 +128,7 @@ export default class TagsInputService {
         this._selectedTags.next(tags);
         this.suggestions.next([]);
         this._selectedIndex.next(-1);
-      })
+      });
 
     const isNotLast = this._selectedIndex
       .combineLatest(this.suggestions, (index, sugg) => index !== sugg.length - 1);
@@ -136,12 +136,12 @@ export default class TagsInputService {
     const keyDownAndNotLast = keyDownEvents
       .map(() => +1)
       .withLatestFrom(isNotLast, (value, notLast) => notLast ? value : false)
-      .filter((item) => !!item)
+      .filter((item) => !!item);
 
     const keyUpEventsAndNotFirst = keyUpEvents
       .map(() => -1)
       .withLatestFrom(this._selectedIndex, (value, index) => index > 0 ? value : false)
-      .filter((item) => !!item)
+      .filter((item) => !!item);
 
     Observable
       .merge(
@@ -176,5 +176,5 @@ export default class TagsInputService {
         this._selectedIndex.next(-1);
       });
   }
-
 }
+

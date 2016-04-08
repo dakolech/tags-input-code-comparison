@@ -23,7 +23,6 @@ app.post('/tags', (req, res) => {
   fs.writeFile(path.join(__dirname, tagsFileName), JSON.stringify(tagsFile, null, 2), (err) => {
     if (err) {
       res.status(400);
-      console.log(err);
     }
     res.status(200).send(newTag);
   });

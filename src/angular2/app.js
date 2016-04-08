@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
 import TagsInput from './component/tags-input';
 
+/* eslint-disable new-cap */
 @Component({
   selector: 'app',
   template: `<tags-input
@@ -9,6 +10,7 @@ import TagsInput from './component/tags-input';
     (changed)="changed($event)"></tags-input>`,
   directives: [TagsInput]
 })
+/* eslint-enable new-cap */
 
 export default class App {
   constructor() {
@@ -19,4 +21,4 @@ export default class App {
   changed(tags) {
     this.tags = tags;
   }
-};
+}

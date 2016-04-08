@@ -71,21 +71,23 @@ class tagsInputService {
         ));
 
     partitionSearchText[1]
-      .subscribe((searchText) => this._suggestions.onNext([]));
+      .subscribe(() => this._suggestions.onNext([]));
   }
 
   _events() {
     const eventsWithSearchText = this._searchText
-      .map((searchText) => !!searchText ? this._eventsStream : this.rx.Observable.empty())
+      .map((searchText) => {
+        return !!searchText ? this._eventsStream : this.rx.Observable.empty();
+      })
       .switch()
-      .filter((event) => !!event && !!event.keyCode)
+      .filter((event) => !!event && !!event.keyCode);
 
     const keyDownEvents = eventsWithSearchText
-      .filter((event) => event.keyCode === DOWN_KEY)
+      .filter((event) => event.keyCode === DOWN_KEY);
     const keyUpEvents = eventsWithSearchText
-      .filter((event) => event.keyCode === UP_KEY)
+      .filter((event) => event.keyCode === UP_KEY);
     const enterEvents = eventsWithSearchText
-      .filter((event) => event.keyCode === ENTER_KEY)
+      .filter((event) => event.keyCode === ENTER_KEY);
 
     this.rx.Observable
       .merge(
@@ -93,14 +95,14 @@ class tagsInputService {
         keyUpEvents,
         enterEvents
       )
-      .subscribe((event) => event.preventDefault())
+      .subscribe((event) => event.preventDefault());
 
     const selectedTag = this._selectedIndex
-      .combineLatest(this._suggestions, (index, sugg) => sugg[index])
+      .combineLatest(this._suggestions, (index, sugg) => sugg[index]);
 
     const enterEventsWithTag = enterEvents
       .withLatestFrom(selectedTag, (event, tag) => tag)
-      .partition((tag) => !!tag)
+      .partition((tag) => !!tag);
 
     enterEventsWithTag[1]
       .withLatestFrom(this._searchText, (event, text) => text)
@@ -111,7 +113,7 @@ class tagsInputService {
       })
       .subscribe((tags) => {
         this._selectedTags.onNext(tags);
-      })
+      });
 
     enterEventsWithTag[0]
       .filter((tag) => !!tag)
@@ -124,30 +126,34 @@ class tagsInputService {
         this._selectedTags.onNext(tags);
         this._suggestions.onNext([]);
         this._selectedIndex.onNext(-1);
-      })
+      });
 
     const isNotLast = this._selectedIndex
       .combineLatest(this._suggestions, (index, sugg) => index !== sugg.length - 1);
 
     const keyDownAndNotLast = keyDownEvents
       .map(() => +1)
-      .withLatestFrom(isNotLast, (value, notLast) => notLast ? value : false)
-      .filter((item) => item)
+      .withLatestFrom(isNotLast, (value, notLast) => {
+        return notLast ? value : false;
+      })
+      .filter((item) => item);
 
     const keyUpEventsAndNotFirst = keyUpEvents
       .map(() => -1)
-      .withLatestFrom(this._selectedIndex, (value, index) => index > 0 ? value : false)
-      .filter((item) => item)
+      .withLatestFrom(this._selectedIndex, (value, index) => {
+        return index > 0 ? value : false;
+      })
+      .filter((item) => item);
 
     this.rx.Observable
       .merge(
         keyDownAndNotLast,
         keyUpEventsAndNotFirst
       )
-      .withLatestFrom(this._selectedIndex, (value, index) => ({value: value, index: index}))
+      .withLatestFrom(this._selectedIndex, (value, index) => ({ value: value, index: index }))
       .scan((acc, val) => {
-        acc = val.index === -1 ? -1 : acc;
-        return acc + val.value;
+        const newAcc = val.index === -1 ? -1 : acc;
+        return newAcc + val.value;
       }, -1)
       .subscribe((item) => {
         this._selectedIndex.onNext(item);

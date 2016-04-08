@@ -4,10 +4,15 @@ const DOWN_KEY = 40;
 const UP_KEY = 38;
 const ENTER_KEY = 13;
 const CTRL_KEY = 17;
-const BACKSPACE_KEY = 8;
 
 describe('Directive: tagsInput', function() {
-  let $compile, element, $rootScope, $scope, $timeout, tagsInputController;
+  let $compile;
+  let element;
+  let $rootScope;
+  let $scope;
+  let $timeout;
+  let tagsInputController;
+
   const tagsArray = [{
     id: 1,
     name: 'shopping'
@@ -26,6 +31,37 @@ describe('Directive: tagsInput', function() {
     getAllTags: () => new Rx.BehaviorSubject({ data: angular.copy(tagsArray) }),
     createOne: () => createOneStream
   };
+
+  function compileElement(tags, name, someFunction) {
+    inject(function(_$compile_, _$rootScope_, _$timeout_) {
+      $compile = _$compile_;
+      $rootScope = _$rootScope_;
+      $scope = $rootScope;
+      $scope.tags = tags;
+      $scope.name = name;
+      $timeout = _$timeout_;
+      $scope.someFunction = someFunction;
+      const ngChange = someFunction ? 'ng-change="someFunction()"' : '';
+      element = angular.element(`<tags-input
+        ng-model="tags"
+        name="{{name}}"
+        ${ngChange}
+        ></tags-input>`);
+      $compile(element)($scope);
+      angular.element(document.body).append(element);
+      $scope.$digest();
+      tagsInputController = element.controller('tagsInput');
+    });
+  }
+
+  function triggerKeyDown(keyCode) {
+    const event = {
+      preventDefault: angular.noop,
+      keyCode: keyCode
+    };
+    tagsInputController.checkKeyDown(event);
+    $scope.$digest();
+  }
 
   beforeEach(window.module('rx'));
   beforeEach(window.module(componentModule.name, {
@@ -267,7 +303,7 @@ describe('Directive: tagsInput', function() {
 
 
   describe('With name', function() {
-    let formName = 'super';
+    const formName = 'super';
     beforeEach(function() {
       compileElement([], formName);
     });
@@ -282,7 +318,7 @@ describe('Directive: tagsInput', function() {
   });
 
   describe('With ng-change', function() {
-    let someFunction = jasmine.createSpy();
+    const someFunction = jasmine.createSpy();
 
     beforeEach(function() {
       compileElement([], 'formName', someFunction);
@@ -303,35 +339,4 @@ describe('Directive: tagsInput', function() {
       });
     });
   });
-
-  function compileElement(tags, name, someFunction) {
-    inject(function(_$compile_, _$rootScope_, _$timeout_) {
-      $compile = _$compile_;
-      $rootScope = _$rootScope_;
-      $scope = $rootScope;
-      $scope.tags = tags;
-      $scope.name = name;
-      $timeout = _$timeout_;
-      $scope.someFunction = someFunction;
-      let ngChange = someFunction ? 'ng-change="someFunction()"' : '';
-      element = angular.element(`<tags-input
-        ng-model="tags"
-        name="{{name}}"
-        ${ngChange}
-        ></tags-input>`);
-      $compile(element)($scope);
-      angular.element(document.body).append(element);
-      $scope.$digest();
-      tagsInputController = element.controller('tagsInput');
-    });
-  }
-
-  function triggerKeyDown(keyCode) {
-    let event = {
-      preventDefault: angular.noop,
-      keyCode: keyCode
-    };
-    tagsInputController.checkKeyDown(event);
-    $scope.$digest();
-  };
 });
