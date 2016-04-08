@@ -20,7 +20,7 @@
     "build": "rimraf dist && webpack --config ./webpack.production.config.js",
 
     "lint": "npm run eslint && npm run tslint",
-      "eslint": "eslint 'src/**/*.js'",
+      "eslint": "eslint 'src/**/*.js' 'server/**/*.js'",
       "tslint": "tslint 'src/**/*.ts'",
 
     "start": "node index.js",
