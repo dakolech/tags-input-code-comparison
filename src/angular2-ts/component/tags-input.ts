@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from 'angular2/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 
 import TagsInputService from './tags-input.service.ts';
@@ -23,7 +23,7 @@ export default class TagsInput {
   public selectedIndex: number;
   @Input() placeholder: string;
   @Input() selectedTags: Array<Tag>;
-  @Input() changed;
+  @Output() changed = new EventEmitter<Array<Tag>>();
 
   constructor(
     private tagsInputService: TagsInputService
@@ -45,7 +45,7 @@ export default class TagsInput {
     this.tagsInputService.selectedTags.subscribe((tags) => {
       this.searchText = '';
       this.selectedTags = tags;
-      this.changed(this.selectedTags);
+      this.changed.emit(this.selectedTags);
     });
   }
 

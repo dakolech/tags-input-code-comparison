@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from 'angular2/core';
+import { Component, ChangeDetectionStrategy, EventEmitter } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 
 import TagsInputService from './tags-input.service';
@@ -11,13 +11,15 @@ import template from './tags-input.jade';
   providers: [TagsInputService],
   directives: [CORE_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: ['selectedTags', 'placeholder', 'changed']
+  inputs: ['selectedTags', 'placeholder'],
+  outputs: ['changed']
 })
 
 export default class TagsInput {
   constructor(
     tagsInputService: TagsInputService
   ) {
+    this.changed = new EventEmitter();
     this.searchText = '';
     this.tagsInputService = tagsInputService;
   }
@@ -36,7 +38,7 @@ export default class TagsInput {
     this.tagsInputService.selectedTags.subscribe((tags) => {
       this.searchText = '';
       this.selectedTags = tags;
-      this.changed(this.selectedTags);
+      this.changed.emit(this.selectedTags);
     });
   }
 
