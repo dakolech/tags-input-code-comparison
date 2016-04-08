@@ -3,6 +3,7 @@ node_js:
 - '5'
 script:
 - npm run-script travis
+- npm run build
 before_script:
 - npm install
 before_install:
