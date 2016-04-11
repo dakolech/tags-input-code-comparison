@@ -12,11 +12,6 @@ export class Files {
 
     this.getFiles();
     this.getAllFiles();
-    // this.convertFiles();
-
-    this.singleFiles.subscribe((file: any) => {
-      // console.log(atob(file.content));
-    });
   }
 
   getFiles(): Array<string> {
@@ -39,7 +34,7 @@ export class Files {
         url: file.html_url,
         download: file.download_url
       }
-    });
+    }).scan(this.makeObject, {});
   }
 
   private getAllFiles() {
@@ -56,5 +51,28 @@ export class Files {
         });
       });
     });
+  }
+
+  private makeObject(acc, curr) {
+    const src = 'src/';
+    let path = curr.path;
+    path = path.slice(src.length);
+    const properties = path.match(/([A-z0-9-.])+/g);
+
+    function recursive(obj, propertiesArray, index) {
+      if (!obj[propertiesArray[index]] && propertiesArray.length-1 === index) {
+        obj[propertiesArray[index]] = curr;
+      } else if (!obj[propertiesArray[index]]) {
+        obj[propertiesArray[index]] = {};
+      }
+
+      if (index < propertiesArray.length) {
+        recursive(obj[propertiesArray[index]], propertiesArray, index+1);
+      }
+    }
+
+    recursive(acc, properties, 0);
+
+    return acc;
   }
 }
