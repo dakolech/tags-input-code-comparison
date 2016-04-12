@@ -25,7 +25,7 @@ export class Files {
   }
 
   get files() {
-    return this.singleFiles.map((file) => {
+    return this.singleFiles.map((file: any) => {
       return {
         path: file.path,
         content: atob(file.content),

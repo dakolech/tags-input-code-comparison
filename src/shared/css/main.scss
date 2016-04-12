@@ -22,6 +22,11 @@ $angular-image-resize: 50px;
       }
     }
   }
+
+  .text {
+    position: relative;
+    z-index: 20;
+  }
 }
 
 .angular-rxjs {
@@ -65,4 +70,9 @@ $angular-image-resize: 50px;
       }
     }
   }
+}
+
+
+.menu {
+  position: fixed;
 }

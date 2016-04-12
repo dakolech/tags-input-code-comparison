@@ -1,4 +1,5 @@
 import { Files } from './github/files.ts';
+import { Listeners } from './lib/listeners.ts';
 
 const codesArray: Array<string> = [
   'angular',
@@ -7,8 +8,30 @@ const codesArray: Array<string> = [
   'angular2-ts'
 ];
 
-const allFiles = new Files(codesArray);
+const object = new Files(codesArray);
+let allFiles = {};
 
-allFiles.files.subscribe((item) => console.log(item))
+object.files.subscribe((item) => {
+  allFiles = item;
+});
 
-// console.log(allFiles);
+const toCompare = [];
+
+class MainIndex {
+  toCompare: Array<string> = [];
+
+  addToCompare(event) {
+    const elementName = event.currentTarget.name;
+    if (!this.toCompare.includes(elementName)) {
+      this.toCompare.push(elementName);
+    }
+  }
+  
+  compare(event) {
+    console.log(this.toCompare);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  Listeners.add(document, new MainIndex());
+});
