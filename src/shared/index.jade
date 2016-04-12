@@ -17,8 +17,9 @@ block body
           .row.text
             h4 AngularJS
           .row.text
-            a(name='angular', on-click='addToCompare()')
-              h6 Add to compare
+            a(name='angular', on-click='compareAction()')
+              h6(switch-hide) Add to compare
+              h6(switch-hide).hide Remove from compare
             a(href='angular/')
               h6 Live demo
 
@@ -31,8 +32,9 @@ block body
           .row.text
             h4 AngularJS + RxJS
           .row.text
-            a(name='angular-rx', on-click='addToCompare()')
-              h6 Add to compare
+            a(name='angular-rx', on-click='compareAction()')
+              h6(switch-hide) Add to compare
+              h6(switch-hide).hide Remove from compare
             a(href='angular-rx/')
               h6 Live demo
 
@@ -43,8 +45,9 @@ block body
           .row.text
             h4 Angular 2 with ES6
           .row.text
-            a(name='angular2', on-click='addToCompare()')
-              h6 Add to compare
+            a(name='angular2', on-click='compareAction()')
+              h6(switch-hide) Add to compare
+              h6(switch-hide).hide Remove from compare
             a(href='angular2/')
               h6 Live demo
 
@@ -54,7 +57,8 @@ block body
           .row.text
             h4 Angular 2 with TypeScript
           .row.text
-            a(name='angular2-ts', on-click='addToCompare()')
-              h6 Add to compare
+            a(name='angular2-ts', on-click='compareAction()')
+              h6(switch-hide) Add to compare
+              h6(switch-hide).hide Remove from compare
             a(href='angular2-ts/')
               h6 Live demo
