@@ -18,7 +18,7 @@ module.exports = {
         path.join(__dirname, 'src/angular2-ts/bootstrap.ts')
       ],
       shared: [
-        path.join(__dirname, 'src/shared/app.js')
+        path.join(__dirname, 'src/shared/app.ts')
       ]
     };
 
