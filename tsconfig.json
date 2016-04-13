@@ -10,6 +10,7 @@
     "node_modules"
   ],
   "filesGlob": [
+    "./src/shared/get-code/custom-typings.d.ts",
     "./src/**/*.ts",
     "./test/**/*.ts",
     "!./node_modules/**/*.ts"
