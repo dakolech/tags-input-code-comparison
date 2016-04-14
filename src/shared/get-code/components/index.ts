@@ -1,1 +1,1 @@
-import './body.component.ts';
+import './main-table.ts';

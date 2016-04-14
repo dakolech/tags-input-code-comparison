@@ -4,7 +4,7 @@ import { Files } from './github/files.ts';
 import { codesArray } from './config.ts';
 
 
-const object = new Files(codesArray);
+const object = new Files(codesArray.map((item: ConfigListElement) => item.name));
 let allFiles = {};
 
 object.files.subscribe((item) => {
