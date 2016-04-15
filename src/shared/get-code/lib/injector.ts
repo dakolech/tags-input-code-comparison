@@ -10,13 +10,15 @@ class InjectorClass {
   }
 
   add<T>(Class: { new(...args: any[]): T }, ...args) {
-    const className = Class.constructor.toString().match(/\w+/g)[1];
+    const className = new Class().constructor.name;
     const instances = args.map((item) => this.get(item));
-    this.instances[className] = new Class(...instances);
+    if (!this.instances[className]) {
+      this.instances[className] = new Class(...instances);
+    }
   }
   
   get<T>(Class: { new(...args: any[]): T }): T {
-    const className = Class.constructor.toString().match(/\w+/g)[1];    
+    const className = new Class().constructor.name;   
     return this.instances[className];
   }
 }
