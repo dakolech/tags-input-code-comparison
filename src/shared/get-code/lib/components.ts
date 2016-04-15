@@ -14,7 +14,9 @@ export class Component {
       const DOMtags = document.querySelectorAll(selector);
 
       Array.from(DOMtags).forEach((elem) => {
-        elem.appendChild(component);
+        if (!!component) {
+          elem.appendChild(component);
+        }
         if (!!obj) {
           Listeners.addToElement(elem, obj);
         }
