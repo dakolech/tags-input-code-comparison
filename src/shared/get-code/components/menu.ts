@@ -9,7 +9,7 @@ class Menu {
   constructor(private CompareService: CompareService) {
 
     this.compare.withLatestFrom(CompareService.toCompare, (event, names) => names)
-      .subscribe((item) => console.log(item));    
+      .subscribe((item) => console.log(item));
   }
 }
 

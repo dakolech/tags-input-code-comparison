@@ -9,13 +9,6 @@ class MainIndex {
     private CompareService: CompareService
   ) {}
 
-  private switchHidden(elem: Element): void {
-    Array.prototype.forEach.call(elem.querySelectorAll('[switch-hide]'), (item) => {
-      const className = 'hide';
-      item.classList.contains(className) ? item.classList.remove(className) : item.classList.add(className);
-    });
-  }
-
   public compareAction(event: Event): void {
     const target = <BetterElement>event.currentTarget;
     const elementName = target.name;
@@ -23,7 +16,7 @@ class MainIndex {
     this.CompareService.push(elementName);
     this.switchHidden(target);
   }
-  
+
   public render() {
     const elements = this.config.map((item: ConfigListElement) =>
       `<div class="col-lg-${item.colWidth} ${item.name}">
@@ -45,7 +38,7 @@ class MainIndex {
             </a>
           </div>
         </div>`);
-        
+
     const rows = this.config.reduce((prev: string[], curr: ConfigListElement, index) => {
       prev[curr.row - 1] = (prev[curr.row - 1] || '') + elements[index];
       return prev;
@@ -54,8 +47,14 @@ class MainIndex {
     return `
       <div class="main-table">
         ${rows.reduce((prev, curr) => prev + curr, '')}
-      </div>
-    `
+      </div>`;
+  }
+
+  private switchHidden(elem: Element): void {
+    Array.prototype.forEach.call(elem.querySelectorAll('[switch-hide]'), (item) => {
+      const className = 'hide';
+      item.classList.contains(className) ? item.classList.remove(className) : item.classList.add(className);
+    });
   }
 }
 

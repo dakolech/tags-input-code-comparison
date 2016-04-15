@@ -13,7 +13,6 @@ object.files.subscribe((item) => {
 
 export class App {
   constructor(element) {
-    
   }
 
   static init(element) {

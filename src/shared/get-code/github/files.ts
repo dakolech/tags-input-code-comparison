@@ -33,7 +33,7 @@ export class Files {
         size: file.size,
         url: file.html_url,
         download: file.download_url
-      }
+      };
     }).scan(this.makeObject, {});
   }
 
@@ -60,14 +60,14 @@ export class Files {
     const properties = path.match(/([A-z0-9-.])+/g);
 
     function recursive(obj, propertiesArray, index) {
-      if (!obj[propertiesArray[index]] && propertiesArray.length-1 === index) {
+      if (!obj[propertiesArray[index]] && propertiesArray.length - 1 === index) {
         obj[propertiesArray[index]] = curr;
       } else if (!obj[propertiesArray[index]]) {
         obj[propertiesArray[index]] = {};
       }
 
       if (index < propertiesArray.length) {
-        recursive(obj[propertiesArray[index]], propertiesArray, index+1);
+        recursive(obj[propertiesArray[index]], propertiesArray, index + 1);
       }
     }
 

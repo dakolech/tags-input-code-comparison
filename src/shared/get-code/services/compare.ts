@@ -9,14 +9,14 @@ export class CompareService {
     this.compareNames.withLatestFrom(this.toCompare, (name, names) => {
       !~names.indexOf(name) ?
         names.push(name) :
-        names = names.filter((item: string) => item !== name)
+        names = names.filter((item: string) => item !== name);
       return names;
     }).subscribe((names) => this.toCompare.next(names));
   }
-  
+
   public push(name) {
     this.compareNames.next(name);
-  }  
+  }
 }
 
 Injector.add(CompareService);
