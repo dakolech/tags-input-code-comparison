@@ -1,10 +1,13 @@
 import { Component } from '../lib/components.ts';
 import { codesArray } from '../config.ts';
+import { Injector } from '../lib/injector.ts';
+import { CompareService } from '../services/compare.ts';
 
 class MainIndex {
-  toCompare: string[] = [];
-  
-  constructor(public config: ConfigListElement[]) {}
+  constructor(
+    public config: ConfigListElement[],
+    private CompareService: CompareService
+  ) {}
 
   private switchHidden(elem: Element): void {
     Array.prototype.forEach.call(elem.querySelectorAll('[switch-hide]'), (item) => {
@@ -17,17 +20,8 @@ class MainIndex {
     const target = <BetterElement>event.currentTarget;
     const elementName = target.name;
 
-    if (!~this.toCompare.indexOf(elementName)) {
-      this.toCompare.push(elementName);
-    } else {
-      this.toCompare = this.toCompare
-        .filter((item: string) => item !== elementName);
-    }
+    this.CompareService.push(elementName);
     this.switchHidden(target);
-  }
-
-  public compare(event: Event): void {
-    console.log(this.toCompare);
   }
   
   public render() {
@@ -65,4 +59,4 @@ class MainIndex {
   }
 }
 
-Component.create('main-table', new MainIndex(codesArray));
+Component.create('main-table', new MainIndex(codesArray, Injector.get(CompareService)));
