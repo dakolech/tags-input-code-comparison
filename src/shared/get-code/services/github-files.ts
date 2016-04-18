@@ -1,20 +1,21 @@
+import { Injector } from '../lib/injector.ts';
 import { Http } from '../lib/http.ts';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
-export class Files {
+export class GithubFiles {
   private codesArray: Array<string>;
   private rawFiles: Subject<Object> = new Subject<Object>();
   private singleFiles: Subject<Object> = new Subject<Object>();
   private githubUrl: string = 'https://api.github.com/repositories/54200760/contents/';
 
-  constructor(codesArray: Array<string>) {
+  public init(codesArray: Array<string>) {
     this.codesArray = codesArray;
 
     this.getFiles();
     this.getAllFiles();
   }
 
-  getFiles(): Array<string> {
+  private getFiles(): Array<string> {
     const files = [];
     this.codesArray.forEach((name) => {
       Http.get(`${this.githubUrl}src/${name}`, (resp) => {
@@ -24,7 +25,7 @@ export class Files {
     return files;
   }
 
-  get files() {
+  public get files(): Observable<CodeFile> {
     return this.singleFiles.map((file: any) => {
       return {
         path: file.path,
@@ -37,7 +38,7 @@ export class Files {
     }).scan(this.makeObject, {});
   }
 
-  private getAllFiles() {
+  private getAllFiles(): void {
     this.rawFiles.subscribe((files: any) => {
       files.filter((file) => file.type === 'file').forEach((file) => {
         Http.get(`${this.githubUrl}${file.path}`, (resp) => {
@@ -53,7 +54,7 @@ export class Files {
     });
   }
 
-  private makeObject(acc, curr) {
+  private makeObject(acc: Object, curr: CodeFile): Object {
     const src = 'src/';
     let path = curr.path;
     path = path.slice(src.length);
@@ -76,3 +77,5 @@ export class Files {
     return acc;
   }
 }
+
+Injector.add(GithubFiles);

@@ -11,3 +11,12 @@ declare class ConfigListElement {
 }
 
 declare function require (id: string): any;
+
+declare class CodeFile {
+  public path: string;
+  public content: string;
+  public name: string;
+  public size: number;
+  public url: string;
+  public download: string;
+}

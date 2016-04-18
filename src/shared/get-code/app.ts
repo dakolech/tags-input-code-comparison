@@ -1,13 +1,15 @@
 import './components/index.ts';
 
-import { Files } from './github/files.ts';
+import { GithubFiles } from './services/github-files.ts';
 import { codesArray } from './config.ts';
+import { Injector } from './lib/injector.ts';
 
-
-const object = new Files(codesArray.map((item: ConfigListElement) => item.name));
 let allFiles = {};
 
-object.files.subscribe((item) => {
+const githubFiles = Injector.get(GithubFiles);
+githubFiles.init(codesArray.map((item: ConfigListElement) => item.name));
+
+githubFiles.files.subscribe((item) => {
   allFiles = item;
 });
 

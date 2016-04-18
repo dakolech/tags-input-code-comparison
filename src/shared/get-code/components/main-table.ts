@@ -29,7 +29,7 @@ class MainIndex {
             <h4> ${item.title} </h4>
           </div>
           <div class="row text">
-            <a name="${item.name}" on-click="compareAction()">
+            <a name="${item.name}" on-click="compareAction">
               <h6 switch-hide> Add to compare </h6>
               <h6 switch-hide class="hide"> Remove from compare </h6>
             </a>

@@ -15,9 +15,9 @@ export class Listeners {
         Observable.fromEvent(item, 'click').subscribe((event) => obj[item.getAttribute('on-click')].next(event));
       }
 
-      if (typeof obj[item.getAttribute('on-click').slice(0, -2)] === 'function') {
+      if (typeof obj[item.getAttribute('on-click')] === 'function') {
         item.addEventListener('click', (event) => {
-          obj[event.currentTarget.getAttribute('on-click').slice(0, -2)](event);
+          obj[event.currentTarget.getAttribute('on-click')](event);
         });
       }
     });
