@@ -1,5 +1,6 @@
 import { Component } from 'angular2/core';
 import TagsInput from './component/tags-input.ts';
+import TagsService from './service/tags.service.ts';
 
 @Component({
   selector: 'app',
@@ -7,7 +8,8 @@ import TagsInput from './component/tags-input.ts';
     [placeholder]="placeholder"
     [selectedTags]="tags"
     (changed)="changed($event)"></tags-input>`,
-  directives: [TagsInput]
+  directives: [TagsInput],
+  providers: [TagsService]
 })
 
 export default class App {
