@@ -9,7 +9,6 @@ export class PopUp {
   constructor(
     private filesArray: CodeFile[]
   ) {
-    console.log(filesArray);
   }
 
   public render() {
@@ -18,7 +17,7 @@ export class PopUp {
     `);
     return `
       <div class='popup'>
-        ${filesContainer.reduce((prev, curr) => prev + curr, '')}
+        ${filesContainer.renderFlat()}
         Popup
       </div>
     `;
@@ -26,7 +25,7 @@ export class PopUp {
 
   public afterRender() {
     this.filesArray.forEach((item, index) =>
-      Component.create(`files-list#file${index}`, new FilesList(this.filesArray[index]));
+      Component.create(`files-list#file${index}`, new FilesList(this.filesArray[index]))
     );
   }
 
