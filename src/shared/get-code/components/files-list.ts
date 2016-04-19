@@ -1,16 +1,26 @@
 import { Component } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
+import { ShowFile } from '../services/show-file.ts';
 
 require('./files-list.scss');
 
 export class FilesList {
-  private codesArray: string[];
+  private name: string;
 
   constructor(
-    private filesObject
+    private filesObject,
+    private ShowFile: ShowFile
   ) {
-    console.log(this.filesObject)
+    this.name = filesObject.name;
+  }
+
+  public showFile(event) {
+    const target = event.currentTarget;
+    const elementName = target.getAttribute('name');
+    const sourceCode = this.findSourceCode(elementName, this.filesObject);
+
+    this.ShowFile.get(this.name).next(sourceCode);
   }
 
   public render() {
@@ -19,7 +29,7 @@ export class FilesList {
         .filter((key) => obj.hasOwnProperty(key) && key !== 'name')
         .map((key) => {
           if (!!~key.indexOf('.')) {
-            return `<li class='file'>${key}</li>`;
+            return `<li class='file' on-click='showFile' name='${key}'>${key}</li>`;
           } else {
             return `
               <ul class='directory'>
@@ -38,6 +48,22 @@ export class FilesList {
         </ul>
       </div>
     `;
+  }
+
+  private findSourceCode(fileName, obj): string {
+    return Object.keys(obj)
+      .filter((key) => obj.hasOwnProperty(key) && key !== 'name')
+      .map((key) => {
+        if (key === fileName) {
+          return obj[key].content;
+        } else {
+          if (!!~key.indexOf('.')) {
+            return null;
+          } else {
+            return this.findSourceCode(fileName, obj[key]);
+          }
+        }
+      }).find((item) => !!item);
   }
 }
 

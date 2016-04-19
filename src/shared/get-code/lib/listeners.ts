@@ -9,16 +9,22 @@ export class Listeners {
   }
 
   static addToElement(element, obj) {
-    Array.prototype.forEach.call(element.querySelectorAll('[on-click]'), (item) => {
+    Array.prototype.forEach.call(element.querySelectorAll('[on-click]'), (elem) => {
 
-      if (obj[item.getAttribute('on-click')] instanceof Subject) {
-        Observable.fromEvent(item, 'click').subscribe((event) => obj[item.getAttribute('on-click')].next(event));
+      if (obj[elem.getAttribute('on-click')] instanceof Subject) {
+        Observable.fromEvent(elem, 'click').subscribe((event) => obj[elem.getAttribute('on-click')].next(event));
       }
 
-      if (typeof obj[item.getAttribute('on-click')] === 'function') {
-        item.addEventListener('click', (event) => {
+      if (typeof obj[elem.getAttribute('on-click')] === 'function') {
+        elem.addEventListener('click', (event) => {
           obj[event.currentTarget.getAttribute('on-click')](event);
         });
+      }
+    });
+
+    Array.prototype.forEach.call(element.querySelectorAll('[subscribe]'), (elem) => {
+      if (obj[elem.getAttribute('subscribe')] instanceof Subject) {
+        obj[elem.getAttribute('subscribe')].subscribe((item) => elem.innerText = item);
       }
     });
   }
