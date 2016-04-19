@@ -53,32 +53,27 @@ export class FilesList {
   }
 
   private addRemSelectClass(target) {
+    const className = 'selected';
     let el = target;
     while ((el = el.parentElement) && !el.classList.contains('files-list'));
 
-    const elemWithSelectedClass = el.querySelector('.selected');
+    const elemWithSelectedClass = el.querySelector(`.${className}`);
 
     if (!!elemWithSelectedClass) {
-      elemWithSelectedClass.classList.remove('selected');
+      elemWithSelectedClass.classList.remove(className);
     }
-    target.classList.add('selected');
+    target.classList.add(className);
   }
 
   private findSourceCode(fileName, obj): string {
     return Object.keys(obj)
       .filter((key) => obj.hasOwnProperty(key) && key !== 'name')
       .map((key) => {
-        if (key === fileName) {
-          return obj[key].content;
-        } else {
-          if (!!~key.indexOf('.')) {
-            return null;
-          } else {
-            return this.findSourceCode(fileName, obj[key]);
-          }
-        }
+        return key === fileName ?
+          obj[key].content :
+          !!~key.indexOf('.') ?
+            null :
+            this.findSourceCode(fileName, obj[key]);
       }).find((item) => !!item);
   }
 }
-
-// export const PopUpComponent = new PopUp(Injector.get(CompareService));

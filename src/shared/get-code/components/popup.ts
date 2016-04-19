@@ -30,7 +30,8 @@ export class PopUp {
 
   public afterRender() {
     this.filesArray.forEach((item, index) => {
-      Component.create(`files-list#file${index}`, new FilesList(this.filesArray[index], Injector.get(ShowFile), codesArray));
+      Component.create(`files-list#file${index}`,
+        new FilesList(this.filesArray[index], Injector.get(ShowFile), codesArray));
       Component.create(`file-code[name='${item.name}']`, new FileCode(item.name, Injector.get(ShowFile)));
     });
   }
