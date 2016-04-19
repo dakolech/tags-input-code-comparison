@@ -1,0 +1,16 @@
+.files-list {
+  ul {
+    padding-left: 10px;
+
+    li {
+      list-style: none;
+      margin-left: 10px;
+      cursor: pointer;
+
+      &.selected {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}

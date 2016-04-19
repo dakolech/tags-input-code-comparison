@@ -9,9 +9,6 @@ import App from './app.ts';
 import { provide } from 'angular2/core';
 import { HTTP_PROVIDERS, BaseRequestOptions, RequestOptions } from 'angular2/http';
 
-import TagsService from './service/tags.service.ts';
-
-
 class MyRequestOptions extends BaseRequestOptions {
   constructor () {
     super();
@@ -21,6 +18,5 @@ class MyRequestOptions extends BaseRequestOptions {
 
 bootstrap(App, [
   HTTP_PROVIDERS,
-  provide(RequestOptions, { useClass: MyRequestOptions }),
-  TagsService
+  provide(RequestOptions, { useClass: MyRequestOptions })
 ]);

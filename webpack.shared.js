@@ -18,7 +18,7 @@ module.exports = {
         path.join(__dirname, 'src/angular2-ts/bootstrap.ts')
       ],
       shared: [
-        path.join(__dirname, 'src/shared/app.js')
+        path.join(__dirname, 'src/shared/app.ts')
       ]
     };
 
@@ -47,7 +47,7 @@ module.exports = {
     }, {
       test: /\.ts$/,
       loader: 'babel!awesome-typescript',
-      include: path.join(`${__dirname}/src/angular2-ts`),
+      include: path.join(`${__dirname}/src`),
       exclude: /node_modules\/rxjs$/
     }, {
       test: /\.jade$/,
@@ -55,14 +55,14 @@ module.exports = {
       include: path.join(`${__dirname}/src`)
     }, {
       test: /\.scss$/,
-      loader: 'style!css!postcss!resolve-url!sass?sourceMap',
+      loader: 'style!css?sourceMap!postcss!resolve-url!sass?sourceMap',
       include: path.join(`${__dirname}/src`)
     }, {
       test: /\.css$/,
-      loader: 'style!css!resolve-url'
+      loader: 'style!css?sourceMap!resolve-url'
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'file'
+      loader: 'url!file'
     }, {
       test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
       loader: "url?limit=10000&mimetype=application/font-woff"
