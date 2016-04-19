@@ -2,6 +2,7 @@ import { Component } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
 import { GithubFiles } from '../services/github-files.ts';
+import { ShowPopup } from '../services/show-popup.ts';
 import { Subject } from 'rxjs';
 import { PopUp } from './popup.ts';
 
@@ -12,9 +13,9 @@ class Menu {
   constructor(
     private CompareService: CompareService,
     private GithubFiles: GithubFiles,
-    private PopUp
+    private PopUp,
+    public ShowPopup: ShowPopup
   ) {
-
     this.compare
       .withLatestFrom(this.CompareService.toCompare, (event, names) => names)
       .withLatestFrom(this.GithubFiles.files, (toCompare, files) => toCompare.map((name) => {
@@ -24,16 +25,11 @@ class Menu {
       }))
       .filter((item) => !!item && !!item.length)
       .subscribe((item) => {
-        if (!this.popupVisible) {
-          Component.create('pop-up', new this.PopUp(item));
-          this.popupVisible = !this.popupVisible;
-        }
+        Component.create('pop-up', new this.PopUp(item));
+        this.ShowPopup.push(true);
       });
-  }
-
-  private constructFiles(toCompare, files) {
-    return toCompare.map((name) => files[name]);
   }
 }
 
-Component.create('.menu', new Menu(Injector.get(CompareService), Injector.get(GithubFiles), PopUp));
+Component.create('.menu', new Menu(
+  Injector.get(CompareService), Injector.get(GithubFiles), PopUp, Injector.get(ShowPopup)));

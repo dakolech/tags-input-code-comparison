@@ -5,7 +5,9 @@ block body
   svg(width="0" height="0")
     clipPath(id='angularClipPolygon')
       polygon(points="100 0, 122 0, 172 50, 178 72, 164 90, 62 96, 6 106, 2 170, 0 78, 0 10")
-  pop-up
+  pop-up(subscribe-class='ShowPopup.isVisible')
+  div(subscribe-class='ShowPopup.isVisible')
+    .popup-background(on-click='hidePopup')
   .menu
     button.btn.btn-default(on-click='compare') Compare
   .main.shared
