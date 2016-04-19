@@ -55,11 +55,11 @@ module.exports = {
       include: path.join(`${__dirname}/src`)
     }, {
       test: /\.scss$/,
-      loader: 'style!css!postcss!resolve-url!sass?sourceMap',
+      loader: 'style!css?sourceMap!postcss!resolve-url!sass?sourceMap',
       include: path.join(`${__dirname}/src`)
     }, {
       test: /\.css$/,
-      loader: 'style!css!resolve-url'
+      loader: 'style!css?sourceMap!resolve-url'
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url!file'
