@@ -10,7 +10,8 @@ export class FilesList {
 
   constructor(
     private filesObject,
-    private ShowFile: ShowFile
+    private ShowFile: ShowFile,
+    private codesArray
   ) {
     this.name = filesObject.name;
   }
@@ -20,6 +21,7 @@ export class FilesList {
     const elementName = target.getAttribute('name');
     const sourceCode = this.findSourceCode(elementName, this.filesObject);
 
+    this.addRemSelectClass(target);
     this.ShowFile.get(this.name).next(sourceCode);
   }
 
@@ -41,13 +43,25 @@ export class FilesList {
     }
 
     return `
-      <div class='files-list'>
-        <h4> ${this.filesObject.name} </h4>
+      <div>
+        <h4> ${this.codesArray.find((item) => item.name === this.filesObject.name).title} </h4>
         <ul>
           ${generateRecursive(this.filesObject).renderFlat()}
         </ul>
       </div>
     `;
+  }
+
+  private addRemSelectClass(target) {
+    let el = target;
+    while ((el = el.parentElement) && !el.classList.contains('files-list'));
+
+    const elemWithSelectedClass = el.querySelector('.selected');
+
+    if (!!elemWithSelectedClass) {
+      elemWithSelectedClass.classList.remove('selected');
+    }
+    target.classList.add('selected');
   }
 
   private findSourceCode(fileName, obj): string {

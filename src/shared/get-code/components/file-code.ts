@@ -15,8 +15,8 @@ export class FileCode {
 
   public render() {
     return `
-      <div class='file-code'>
-        <div subscribe='code'></div>
+      <div>
+        <pre><code class='javascript' subscribe='code'></code></pre>
       </div>
     `;
   }
