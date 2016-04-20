@@ -2,27 +2,25 @@ import { Injector } from '../lib/injector.ts';
 import { Http } from '../lib/http.ts';
 import { Subject, Observable } from 'rxjs';
 
-export class GithubFiles {
+export class GetFiles {
   private codesArray: Array<string>;
   private rawFiles: Subject<Object> = new Subject<Object>();
   private singleFiles: Subject<Object> = new Subject<Object>();
   private githubUrl: string = 'https://api.github.com/repositories/54200760/contents/';
+  private socket;
 
-  public init(codesArray: Array<string>) {
+  public init(socket, codesArray: Array<string>) {
+    this.socket = socket;
     this.codesArray = codesArray;
 
     this.getFiles();
     this.getAllFiles();
   }
 
-  private getFiles(): Array<string> {
-    const files = [];
+  private getFiles(): void {
     this.codesArray.forEach((name) => {
-      Http.get(`${this.githubUrl}src/${name}`, (resp) => {
-        this.rawFiles.next(resp);
-      });
+      this.socket.emit('getFiles', name);
     });
-    return files;
   }
 
   public get files(): Observable<CodeFile> {
@@ -78,4 +76,4 @@ export class GithubFiles {
   }
 }
 
-Injector.add(GithubFiles);
+Injector.add(GetFiles);
