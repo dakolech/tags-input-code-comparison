@@ -6,7 +6,6 @@ export class GetFiles {
   private codesArray: Array<string>;
   private rawFiles: Subject<Object> = new Subject<Object>();
   private singleFiles: Subject<Object> = new Subject<Object>();
-  private githubUrl: string = 'https://api.github.com/repositories/54200760/contents/';
   private socket;
 
   public init(socket, codesArray: Array<string>) {
@@ -24,30 +23,15 @@ export class GetFiles {
   }
 
   public get files(): Observable<CodeFile> {
-    return this.singleFiles.map((file: any) => {
-      return {
-        path: file.path,
-        content: atob(file.content),
-        name: file.name,
-        size: file.size,
-        url: file.html_url,
-        download: file.download_url
-      };
-    }).scan(this.makeObject, {});
+    return this.singleFiles.scan(this.makeObject, {});
   }
 
   private getAllFiles(): void {
-    this.rawFiles.subscribe((files: any) => {
-      files.filter((file) => file.type === 'file').forEach((file) => {
-        Http.get(`${this.githubUrl}${file.path}`, (resp) => {
-          this.singleFiles.next(resp);
-        });
-      });
-
-      files.filter((file) => file.type === 'dir').forEach((file) => {
-        Http.get(`${this.githubUrl}${file.path}`, (resp) => {
-          this.rawFiles.next(resp);
-        });
+    this.socket.on('files', (data) => {
+      this.singleFiles.next({
+        content: data.content,
+        name: data.name,
+        path: data.path
       });
     });
   }
