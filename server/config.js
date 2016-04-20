@@ -6,6 +6,10 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config.js');
 
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const socketFiles = require('./socket-files');
+
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -41,4 +45,10 @@ app.use(express.static('src/shared/images'));
 app.set('views', path.join(__dirname, '../'));
 app.set('view engine', 'jade');
 
-app.listen(port);
+
+io.on('connection', (socket) => {
+  console.log('connected')
+  socketFiles.init(socket);
+});
+
+server.listen(port);
