@@ -6,7 +6,9 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config.js');
 
+/* eslint-disable new-cap */
 const server = require('http').Server(app);
+/* eslint-enable new-cap */
 const io = require('socket.io')(server);
 const socketFiles = require('./socket-files');
 
@@ -47,7 +49,6 @@ app.set('view engine', 'jade');
 
 
 io.on('connection', (socket) => {
-  console.log('connected')
   socketFiles.init(socket);
 });
 
