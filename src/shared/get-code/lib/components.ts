@@ -31,7 +31,7 @@ export class Component {
   }
 }
 
-export class DOMComponent implements IDOMComponent {
+export class DOMComponent {
   public DOM: BehaviorSubject<Node> = new BehaviorSubject(null);
   public DOMstring: BehaviorSubject<string> = new BehaviorSubject(null);
   public parent: BehaviorSubject<Node> = new BehaviorSubject(null);
