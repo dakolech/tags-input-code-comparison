@@ -1,13 +1,15 @@
-import { Component } from '../lib/components.ts';
+import { Component, DOMComponent } from '../lib/components.ts';
 import { codesArray } from '../config.ts';
 import { Injector } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
 
-class MainIndex {
+class MainIndex extends DOMComponent {
   constructor(
     public config: ConfigListElement[],
     private CompareService: CompareService
-  ) {}
+  ) {
+    super();
+  }
 
   public compareAction(event: Event): void {
     const target = <BetterElement>event.currentTarget;

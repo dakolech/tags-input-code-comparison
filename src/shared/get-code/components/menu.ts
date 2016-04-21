@@ -1,4 +1,4 @@
-import { Component } from '../lib/components.ts';
+import { Component, DOMComponent } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
 import { GetFiles } from '../services/get-files.ts';
@@ -6,7 +6,7 @@ import { ShowPopup } from '../services/show-popup.ts';
 import { Subject } from 'rxjs';
 import { PopUp } from './popup.ts';
 
-class Menu {
+class Menu extends DOMComponent {
   public compare: Subject<Event> = new Subject();
   public popupVisible: boolean = false;
 
@@ -16,6 +16,7 @@ class Menu {
     private PopUp,
     public ShowPopup: ShowPopup
   ) {
+    super();
     this.compare
       .withLatestFrom(this.CompareService.toCompare, (event, names) => names)
       .withLatestFrom(this.GetFiles.files, (toCompare, files) => toCompare.map((name) => {
@@ -23,10 +24,9 @@ class Menu {
         filesObject.name = name;
         return filesObject;
       }))
-      .filter((item) => !!item && !!item.length)
-      .subscribe((item) => {
-        Component.create('pop-up', new this.PopUp(item));
-        this.ShowPopup.push(true);
+      .filter((files) => !!files && !!files.length)
+      .subscribe((files) => {
+        Component.create('pop-up', new this.PopUp(files, this.ShowPopup));
       });
   }
 }

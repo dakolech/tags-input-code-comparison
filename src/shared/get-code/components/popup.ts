@@ -1,4 +1,4 @@
-import { Component } from '../lib/components.ts';
+import { Component, DOMComponent } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
 import { FilesList } from './files-list.ts';
@@ -9,11 +9,12 @@ import { ShowPopup } from '../services/show-popup.ts';
 
 require('./popup.scss');
 
-export class PopUp {
+export class PopUp extends DOMComponent {
   constructor(
     private filesArray: CodeFile[],
     public ShowPopup: ShowPopup
   ) {
+    super();
     this.ShowPopup.push(true);
     const url = '/compare/' + this.filesArray.map((obj) => obj.name).join('-');
     window.history.pushState(null, '', url);

@@ -1,11 +1,10 @@
-import { Component } from '../lib/components.ts';
+import { Component, DOMComponent } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
-import { CompareService } from '../services/compare.ts';
 import { ShowFile } from '../services/show-file.ts';
 
 require('./files-list.scss');
 
-export class FilesList {
+export class FilesList extends DOMComponent {
   private name: string;
 
   constructor(
@@ -13,6 +12,7 @@ export class FilesList {
     private ShowFile: ShowFile,
     private codesArray
   ) {
+    super();
     this.name = filesObject.name;
   }
 
@@ -36,7 +36,7 @@ export class FilesList {
             return `
               <ul class='directory'>
                 ${key}
-                ${generateRecursive(obj[key]).renderFlat()}
+                ${generateRecursive(obj[key]).join('')}
               </ul>`;
           }
         });
@@ -46,7 +46,7 @@ export class FilesList {
       <div>
         <h4> ${this.codesArray.find((item) => item.name === this.filesObject.name).title} </h4>
         <ul>
-          ${generateRecursive(this.filesObject).renderFlat()}
+          ${generateRecursive(this.filesObject).join('')}
         </ul>
       </div>
     `;

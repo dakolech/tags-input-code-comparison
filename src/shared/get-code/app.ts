@@ -8,6 +8,10 @@ import { Injector } from './lib/injector.ts';
 const io = require('socket.io-client');
 const socket = io();
 
+window.onpopstate = function(event) {
+  debugger
+}
+
 export class App {
   constructor(
     private codesArray,

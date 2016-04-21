@@ -1,12 +1,13 @@
-import { Component } from '../lib/components.ts';
+import { Component, DOMComponent } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
 import { ShowPopup } from '../services/show-popup.ts';
 import { Subject } from 'rxjs';
 
-class Body {
+class Body extends DOMComponent {
   constructor(
     public ShowPopup: ShowPopup
   ) {
+    super();
   }
 
   public hidePopup(event) {
