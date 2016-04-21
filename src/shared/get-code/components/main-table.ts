@@ -46,7 +46,7 @@ class MainIndex {
 
     return `
       <div class="main-table">
-        ${rows.renderFlat()}
+        ${rows.join('')}
       </div>`;
   }
 

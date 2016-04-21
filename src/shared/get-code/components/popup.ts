@@ -5,13 +5,18 @@ import { FilesList } from './files-list.ts';
 import { FileCode } from './file-code.ts';
 import { ShowFile } from '../services/show-file.ts';
 import { codesArray } from '../config.ts';
+import { ShowPopup } from '../services/show-popup.ts';
 
 require('./popup.scss');
 
 export class PopUp {
   constructor(
-    private filesArray: CodeFile[]
+    private filesArray: CodeFile[],
+    public ShowPopup: ShowPopup
   ) {
+    this.ShowPopup.push(true);
+    const url = '/compare/' + this.filesArray.map((obj) => obj.name).join('-');
+    window.history.pushState(null, '', url);
   }
 
   public render() {
@@ -23,7 +28,7 @@ export class PopUp {
     );
     return `
       <div class='popup'>
-        ${filesContainer.renderFlat()}
+        ${filesContainer.join('')}
       </div>
     `;
   }

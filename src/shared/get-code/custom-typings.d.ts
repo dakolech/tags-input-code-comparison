@@ -20,7 +20,3 @@ declare class CodeFile {
   public url: string;
   public download: string;
 }
-
-interface Array<T> {
-  renderFlat(): string;
-}
