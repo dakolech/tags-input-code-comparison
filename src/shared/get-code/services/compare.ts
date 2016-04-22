@@ -1,11 +1,14 @@
 import { Injector } from '../lib/injector.ts';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { GetFiles } from './get-files.ts';
 
 export class CompareService {
   public toCompare: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public compareNames: Subject<string> = new Subject();
 
-  constructor() {
+  constructor(
+    private GetFiles: GetFiles
+  ) {
     this.subscribeCompareNames();
   }
 
@@ -21,6 +24,22 @@ export class CompareService {
       return names;
     }).subscribe((names) => this.toCompare.next(names));
   }
+
+  public get files() {
+    return this.toCompare
+      .combineLatest(this.GetFiles.files, (toCompare, files) =>
+        toCompare
+          .filter((name) => !!files[name])
+          .map((name) => {
+            const filesObject = files[name];
+            if (!!filesObject) {
+              filesObject.name = name;
+            }
+            return filesObject;
+          })
+      )
+      .filter((files) => !!files && !!files.length)
+  }
 }
 
-Injector.add(CompareService);
+Injector.add(CompareService, GetFiles);

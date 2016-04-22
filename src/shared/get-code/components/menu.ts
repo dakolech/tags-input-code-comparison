@@ -18,15 +18,8 @@ class Menu extends DOMComponent {
   ) {
     super();
     this.compare
-      .withLatestFrom(this.CompareService.toCompare, (event, names) => names)
-      .withLatestFrom(this.GetFiles.files, (toCompare, files) => toCompare.map((name) => {
-        const filesObject = files[name];
-        filesObject.name = name;
-        return filesObject;
-      }))
-      .filter((files) => !!files && !!files.length)
       .subscribe((files) => {
-        Component.create('pop-up', new this.PopUp(files, this.ShowPopup));
+        Component.create('pop-up', new this.PopUp(this.CompareService, this.ShowPopup));
       });
   }
 }

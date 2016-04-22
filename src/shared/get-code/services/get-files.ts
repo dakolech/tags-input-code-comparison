@@ -1,11 +1,11 @@
 import { Injector } from '../lib/injector.ts';
 import { Http } from '../lib/http.ts';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, ReplaySubject } from 'rxjs';
 
 export class GetFiles {
   private codesArray: Array<string>;
-  private rawFiles: Subject<Object> = new Subject<Object>();
-  private singleFiles: Subject<Object> = new Subject<Object>();
+  private rawFiles: ReplaySubject<Object> = new ReplaySubject<Object>();
+  private singleFiles: ReplaySubject<Object> = new ReplaySubject<Object>();
   private socket;
 
   public init(socket, codesArray: Array<string>) {
