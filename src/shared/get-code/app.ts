@@ -1,15 +1,18 @@
 import './components/index.ts';
+import  './routes.ts';
 
 import { GetFiles } from './services/get-files.ts';
 import { ShowFile } from './services/show-file.ts';
 import { codesArray } from './config.ts';
 import { Injector } from './lib/injector.ts';
+import { Router } from './lib/router.ts';
 
 const io = require('socket.io-client');
 const socket = io();
 
+
 window.onpopstate = function(event) {
-  debugger
+  Router.listen();
 }
 
 export class App {

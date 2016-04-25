@@ -20,3 +20,9 @@ declare class CodeFile {
   public url: string;
   public download: string;
 }
+
+declare class State {
+  public path: string;
+  public name: string;
+  public handler: Function;
+}

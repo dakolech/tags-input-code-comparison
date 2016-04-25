@@ -5,6 +5,7 @@ import { GetFiles } from '../services/get-files.ts';
 import { ShowPopup } from '../services/show-popup.ts';
 import { Subject } from 'rxjs';
 import { PopUp } from './popup.ts';
+import { Router } from '../lib/router.ts';
 
 class Menu extends DOMComponent {
   public compare: Subject<Event> = new Subject();
@@ -18,8 +19,10 @@ class Menu extends DOMComponent {
   ) {
     super();
     this.compare
+      .withLatestFrom(this.CompareService.toCompare, (event, files) => files)
       .subscribe((files) => {
-        Component.create('pop-up', new this.PopUp(this.CompareService, this.ShowPopup));
+        Router.go('popUp', { names: files.join('_') });
+        // Component.create('pop-up', new this.PopUp(this.CompareService, this.ShowPopup));
       });
   }
 }

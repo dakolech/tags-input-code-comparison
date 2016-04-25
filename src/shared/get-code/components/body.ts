@@ -2,6 +2,7 @@ import { Component, DOMComponent } from '../lib/components.ts';
 import { Injector } from '../lib/injector.ts';
 import { ShowPopup } from '../services/show-popup.ts';
 import { Subject } from 'rxjs';
+import { Router } from '../lib/router.ts';
 
 class Body extends DOMComponent {
   constructor(
@@ -11,9 +12,7 @@ class Body extends DOMComponent {
   }
 
   public hidePopup(event) {
-    this.ShowPopup.push(false);
-    const popupElement = document.querySelector('pop-up');
-    popupElement.removeChild(popupElement.querySelector('.popup'));
+    Router.go('main');
   }
 }
 

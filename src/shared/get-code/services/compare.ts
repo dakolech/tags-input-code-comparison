@@ -1,6 +1,7 @@
 import { Injector } from '../lib/injector.ts';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { GetFiles } from './get-files.ts';
+import { codesArray } from '../config.ts';
 
 export class CompareService {
   public toCompare: BehaviorSubject<string[]> = new BehaviorSubject([]);
@@ -12,8 +13,16 @@ export class CompareService {
     this.subscribeCompareNames();
   }
 
-  public push(name) {
+  public push(name: string) {
     this.compareNames.next(name);
+  }
+
+  public pushStringArray(names: string) {
+    const namesArray = names.split('_');
+    const codesNames = codesArray.map((code) => code.name);
+    namesArray
+      .filter((param) => !!~codesNames.indexOf(param))
+      .forEach((param) => this.compareNames.next(param));
   }
 
   private subscribeCompareNames() {
