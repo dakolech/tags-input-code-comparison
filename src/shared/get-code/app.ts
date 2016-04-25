@@ -13,7 +13,7 @@ const socket = io();
 
 window.onpopstate = function(event) {
   Router.listen();
-}
+};
 
 export class App {
   constructor(

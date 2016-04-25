@@ -41,7 +41,7 @@ export class DOMComponent {
 
     this.DOMstring.filter((dom: string) => !!dom)
       .subscribe((dom) => {
-        this.DOM.next(Component.stringToElement(dom))
+        this.DOM.next(Component.stringToElement(dom));
       });
 
     this.DOM

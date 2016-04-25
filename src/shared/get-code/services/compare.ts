@@ -47,7 +47,7 @@ export class CompareService {
             return filesObject;
           })
       )
-      .filter((files) => !!files && !!files.length)
+      .filter((files) => !!files && !!files.length);
   }
 }
 

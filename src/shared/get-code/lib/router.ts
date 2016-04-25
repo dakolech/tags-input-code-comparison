@@ -45,10 +45,10 @@ export const Router = {
       const stateParams = state.path.split('/');
       const urlParams = window.location.pathname.split('/');
       const url = stateParams
-        .map((stateParam, index) => 
+        .map((stateParam, index) =>
           stateParam.indexOf(':') === 0 ? params[stateParam.slice(1, stateParam.length)] : stateParam
         ).join('/');
       window.history.pushState(null, null, url);
     }
   }
-}
+};

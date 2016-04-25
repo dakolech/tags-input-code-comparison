@@ -20,10 +20,8 @@ export class PopUp extends DOMComponent {
     this.CompareService.files.subscribe((files) => {
       this.filesArray = files;
       this.reRender();
-    })
+    });
     this.ShowPopup.push(true);
-    // const url = '/compare/' + this.filesArray.map((obj) => obj.name).join('-');
-    // window.history.pushState(null, '', url);
   }
 
   public render() {
@@ -50,6 +48,3 @@ export class PopUp extends DOMComponent {
       });
   }
 }
-
-// Component.create('pop-up', new PopUp(Injector.get(CompareService), Injector.get(ShowPopup)));
-
