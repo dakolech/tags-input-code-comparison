@@ -32,6 +32,20 @@ export class Listeners {
       }
     });
 
+    Array.prototype.forEach.call(element.querySelectorAll('[hide]'), (elem) => {
+      const objectProperty = Listeners.convertStringToAtrrCall(elem, 'hide', obj);
+      if (objectProperty instanceof Subject) {
+        objectProperty.subscribe((item) => !!item ? elem.classList.add('hide') : elem.classList.remove('hide'));
+      }
+    });
+
+    Array.prototype.forEach.call(element.querySelectorAll('[show]'), (elem) => {
+      const objectProperty = Listeners.convertStringToAtrrCall(elem, 'show', obj);
+      if (objectProperty instanceof Subject) {
+        objectProperty.subscribe((item) => !!item ? elem.classList.remove('hide') : elem.classList.add('hide'));
+      }
+    });
+
     Array.prototype.forEach.call(element.querySelectorAll('[subscribe-class]'), (elem) => {
       const objectProperty = Listeners.convertStringToAtrrCall(elem, 'subscribe-class', obj);
       if (objectProperty instanceof Subject) {
