@@ -5,6 +5,8 @@ script:
 - npm run lint
 - npm run travis
 - npm run build
+- git add dist/
+- git commit -m "dist"
 before_script:
 - npm install
 before_install:
