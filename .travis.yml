@@ -5,6 +5,8 @@ script:
 - npm run lint
 - npm run travis
 - npm run build
+- git config --global user.email "dakolech@example.com"
+- git config --global user.name "dakolech"
 - git add dist/
 - git commit -m "dist"
 before_script:
