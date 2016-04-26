@@ -14,3 +14,12 @@ export const Injector = {
     return this.instances[className];
   }
 };
+
+
+export function Inject(label: any) {
+  return function (target: any, key: string) {
+    Object.defineProperty(target, key, {
+      get: () => Injector.get(label)
+    });
+  }
+}
