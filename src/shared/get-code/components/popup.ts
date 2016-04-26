@@ -1,8 +1,7 @@
 import { Component, DOMComponent } from '../lib/components.ts';
-import { Injector } from '../lib/injector.ts';
+import { Inject } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
 import { FilesList } from './files-list.ts';
-import { ShowFile } from '../services/show-file.ts';
 import { codesArray } from '../config.ts';
 import { ShowPopup } from '../services/show-popup.ts';
 import { FileCode } from './file-code.ts';
@@ -11,11 +10,12 @@ require('./popup.scss');
 
 export class PopUp extends DOMComponent {
   private filesArray = [];
+  @Inject(CompareService)
+  private CompareService: CompareService;
+  @Inject(ShowPopup)
+  public ShowPopup: ShowPopup;
 
-  constructor(
-    private CompareService: CompareService,
-    public ShowPopup: ShowPopup
-  ) {
+  constructor() {
     super();
     this.CompareService.files.subscribe((files) => {
       this.filesArray = files;
@@ -43,8 +43,8 @@ export class PopUp extends DOMComponent {
     this.filesArray
       .forEach((item, index) => {
         Component.create(`files-list#file${index}`,
-          new FilesList(this.filesArray[index], Injector.get(ShowFile), codesArray));
-        Component.create(`file-code[name='${item.name}']`, new FileCode(item.name, Injector.get(ShowFile)));
+          new FilesList(this.filesArray[index], codesArray));
+        Component.create(`file-code[name='${item.name}']`, new FileCode(item.name));
       });
   }
 }

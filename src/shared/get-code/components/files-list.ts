@@ -1,15 +1,16 @@
-import { Component, DOMComponent } from '../lib/components.ts';
-import { Injector } from '../lib/injector.ts';
+import { DOMComponent } from '../lib/components.ts';
+import { Inject } from '../lib/injector.ts';
 import { ShowFile } from '../services/show-file.ts';
 
 require('./files-list.scss');
 
 export class FilesList extends DOMComponent {
   private name: string;
+  @Inject(ShowFile)
+  private ShowFile: ShowFile;
 
   constructor(
     private filesObject,
-    private ShowFile: ShowFile,
     private codesArray
   ) {
     super();

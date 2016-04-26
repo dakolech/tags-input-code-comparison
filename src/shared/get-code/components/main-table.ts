@@ -1,15 +1,16 @@
 import { Component, DOMComponent } from '../lib/components.ts';
 import { codesArray } from '../config.ts';
-import { Injector } from '../lib/injector.ts';
+import { Inject } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
 import { BehaviorSubject } from 'rxjs';
 
 class MainIndex extends DOMComponent {
   public hideObs: Object = {};
+  @Inject(CompareService)
+  private CompareService: CompareService;
 
   constructor(
-    public config: ConfigListElement[],
-    private CompareService: CompareService
+    public config: ConfigListElement[]
   ) {
     super();
     this.config.forEach((item) => {
@@ -64,4 +65,4 @@ class MainIndex extends DOMComponent {
   }
 }
 
-Component.create('main-table', new MainIndex(codesArray, Injector.get(CompareService)));
+Component.create('main-table', new MainIndex(codesArray));

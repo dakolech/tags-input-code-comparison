@@ -1,13 +1,13 @@
 import { Component, DOMComponent } from '../lib/components.ts';
-import { Injector } from '../lib/injector.ts';
+import { Inject } from '../lib/injector.ts';
 import { ShowPopup } from '../services/show-popup.ts';
-import { Subject } from 'rxjs';
 import { Router } from '../lib/router.ts';
 
 class Body extends DOMComponent {
-  constructor(
-    public ShowPopup: ShowPopup
-  ) {
+  @Inject(ShowPopup)
+  public ShowPopup: ShowPopup;
+
+  constructor() {
     super();
   }
 
@@ -16,4 +16,4 @@ class Body extends DOMComponent {
   }
 }
 
-Component.create('body', new Body(Injector.get(ShowPopup)));
+Component.create('body', new Body());
