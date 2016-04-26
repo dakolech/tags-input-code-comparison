@@ -2,21 +2,32 @@ import { Component, DOMComponent } from '../lib/components.ts';
 import { codesArray } from '../config.ts';
 import { Injector } from '../lib/injector.ts';
 import { CompareService } from '../services/compare.ts';
+import { BehaviorSubject } from 'rxjs';
 
 class MainIndex extends DOMComponent {
+  public hideObs: Object = {};
+
   constructor(
     public config: ConfigListElement[],
     private CompareService: CompareService
   ) {
     super();
+    this.config.forEach((item) => {
+      this.hideObs[item.name] = new BehaviorSubject<boolean>(true);
+    });
+
+    this.CompareService.toCompare.subscribe((toCompare) => {
+      this.config.forEach((configItem) => {
+        this.hideObs[configItem.name].next(!!~toCompare.indexOf(configItem.name) ? false : true);
+      });
+    });
   }
 
   public compareAction(event: Event): void {
-    const target = <BetterElement>event.currentTarget;
-    const elementName = target.name;
+    const currentTarget = <BetterElement>event.currentTarget;
+    const elementName = currentTarget.name;
 
     this.CompareService.push(elementName);
-    this.switchHidden(target);
   }
 
   public render() {
@@ -32,8 +43,8 @@ class MainIndex extends DOMComponent {
           </div>
           <div class="row text">
             <a name="${item.name}" on-click="compareAction">
-              <h6 switch-hide> Add to compare </h6>
-              <h6 switch-hide class="hide"> Remove from compare </h6>
+              <h6 show="hideObs.${item.name}"> Add to compare </h6>
+              <h6 hide="hideObs.${item.name}"> Remove from compare </h6>
             </a>
             <a href="${item.name}/">
               <h6> Live demo </h6>
@@ -50,13 +61,6 @@ class MainIndex extends DOMComponent {
       <div class="main-table">
         ${rows.join('')}
       </div>`;
-  }
-
-  private switchHidden(elem: Element): void {
-    Array.prototype.forEach.call(elem.querySelectorAll('[switch-hide]'), (item) => {
-      const className = 'hide';
-      item.classList.contains(className) ? item.classList.remove(className) : item.classList.add(className);
-    });
   }
 }
 

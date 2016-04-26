@@ -20,9 +20,9 @@ class Menu extends DOMComponent {
     super();
     this.compare
       .withLatestFrom(this.CompareService.toCompare, (event, files) => files)
+      .filter((files) => !!files.length)
       .subscribe((files) => {
         Router.go('popUp', { names: files.join('_') });
-        // Component.create('pop-up', new this.PopUp(this.CompareService, this.ShowPopup));
       });
   }
 }
