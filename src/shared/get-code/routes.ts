@@ -20,7 +20,7 @@ Router.add({
     if (!!params && params.names && fromState.name !== 'main') {
       Injector.get(CompareService).pushStringArray(params.names);
     }
-    Component.create('pop-up', new PopUp(Injector.get(CompareService), Injector.get(ShowPopup)));
+    Component.create('pop-up', new PopUp());
   }
 });
 
