@@ -20,7 +20,7 @@ export function Inject(label: any) {
     Object.defineProperty(target, key, {
       get: () => Injector.get(label)
     });
-  }
+  };
 }
 
 export function Injectable() {

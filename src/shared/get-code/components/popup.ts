@@ -9,11 +9,11 @@ import { FileCode } from './file-code.ts';
 require('./popup.scss');
 
 export class PopUp extends DOMComponent {
+  @Inject(ShowPopup)
+  public ShowPopup: ShowPopup;
   private filesArray = [];
   @Inject(CompareService)
   private CompareService: CompareService;
-  @Inject(ShowPopup)
-  public ShowPopup: ShowPopup;
 
   constructor() {
     super();

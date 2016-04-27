@@ -52,3 +52,7 @@ export const Router = {
     }
   }
 };
+
+window.onpopstate = function(event) {
+  Router.listen();
+};

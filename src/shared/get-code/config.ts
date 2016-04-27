@@ -26,12 +26,12 @@ export const codesArray: ConfigListElement[] = [
     imageHMTL: `<img class='angular' src='/angular2.png'/>`,
     row: 2,
     colWidth: 6
-  // }, {
-  //   name: 'shared',
-  //   title: 'Shared',
-  //   imageHMTL: `<img class='angular' src='angular2.png'/>`,
-  //   row: 3,
-  //   colWidth: 6
+  }, {
+    name: 'shared',
+    title: 'Shared',
+    imageHMTL: `<img class='angular' src=''/>`,
+    row: 3,
+    colWidth: 6
   }
 ];
 

@@ -16,7 +16,7 @@ Router.add({
 Router.add({
   name: 'popUp',
   path: '/compare/:names',
-  handler: (params: any, fromState) => {
+  handler: (params: any, fromState: State) => {
     if (!!params && params.names && fromState.name !== 'main') {
       Injector.get(CompareService).pushStringArray(params.names);
     }

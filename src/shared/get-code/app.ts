@@ -4,22 +4,20 @@ import  './routes.ts';
 import { GetFiles } from './services/get-files.ts';
 import { ShowFile } from './services/show-file.ts';
 import { codesArray } from './config.ts';
-import { Injector } from './lib/injector.ts';
+import { Inject } from './lib/injector.ts';
 import { Router } from './lib/router.ts';
 
 const io = require('socket.io-client');
 const socket = io();
 
-
-window.onpopstate = function(event) {
-  Router.listen();
-};
-
 export class App {
+  @Inject(GetFiles)
+  private GetFiles: GetFiles;
+  @Inject(ShowFile)
+  private ShowFile: ShowFile;
+
   constructor(
     private codesArray,
-    private GetFiles: GetFiles,
-    private ShowFile: ShowFile,
     private socket
   ) {
     const namesArray = this.codesArray.map((item: ConfigListElement) => item.name);
@@ -28,6 +26,6 @@ export class App {
   }
 
   static init(element) {
-    return new App(codesArray, Injector.get(GetFiles), Injector.get(ShowFile), socket);
+    return new App(codesArray, socket);
   }
 }
