@@ -1,6 +1,7 @@
-import { Injector } from '../lib/injector.ts';
+import { Injectable } from '../lib/injector.ts';
 import { BehaviorSubject, Subject } from 'rxjs';
 
+@Injectable()
 export class ShowFile {
   private observablesObject: Object = {};
 
@@ -14,5 +15,3 @@ export class ShowFile {
     return this.observablesObject[name];
   }
 }
-
-Injector.add(ShowFile);

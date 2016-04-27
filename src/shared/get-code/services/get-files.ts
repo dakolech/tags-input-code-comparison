@@ -1,7 +1,8 @@
-import { Injector } from '../lib/injector.ts';
+import { Injectable } from '../lib/injector.ts';
 import { Http } from '../lib/http.ts';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 
+@Injectable()
 export class GetFiles {
   private codesArray: Array<string>;
   private rawFiles: ReplaySubject<Object> = new ReplaySubject<Object>();
@@ -22,7 +23,7 @@ export class GetFiles {
     });
   }
 
-  public get files(): Observable<CodeFile> {
+  public get files(): Observable<Object> {
     return this.singleFiles.scan(this.makeObject, {});
   }
 
@@ -36,7 +37,7 @@ export class GetFiles {
     });
   }
 
-  private makeObject(acc: Object, curr: CodeFile): Object {
+  private makeObject(acc: any, curr: any): Object {
     const src = 'src/';
     let path = curr.path;
     path = path.slice(src.length);
@@ -59,5 +60,3 @@ export class GetFiles {
     return acc;
   }
 }
-
-Injector.add(GetFiles);

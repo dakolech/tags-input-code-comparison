@@ -1,15 +1,16 @@
-import { Injector } from '../lib/injector.ts';
+import { Inject, Injectable } from '../lib/injector.ts';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { GetFiles } from './get-files.ts';
 import { codesArray } from '../config.ts';
 
+@Injectable()
 export class CompareService {
   public toCompare: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public compareNames: Subject<string> = new Subject();
+  @Inject(GetFiles)
+  private GetFiles: GetFiles;
 
-  constructor(
-    private GetFiles: GetFiles
-  ) {
+  constructor() {
     this.subscribeCompareNames();
   }
 
@@ -51,4 +52,4 @@ export class CompareService {
   }
 }
 
-Injector.add(CompareService, GetFiles);
+// Injector.add(CompareService, GetFiles);

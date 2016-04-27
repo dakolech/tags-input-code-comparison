@@ -1,6 +1,7 @@
-import { Injector } from '../lib/injector.ts';
+import { Injectable } from '../lib/injector.ts';
 import { BehaviorSubject } from 'rxjs';
 
+@Injectable()
 export class ShowPopup {
   public isVisible: BehaviorSubject<string> = new BehaviorSubject('hide');
 
@@ -8,5 +9,3 @@ export class ShowPopup {
     this.isVisible.next(value ? '' : 'hide');
   }
 }
-
-Injector.add(ShowPopup);
