@@ -1,11 +1,10 @@
 export const Injector = {
   instances: {},
 
-  add<T>(Class: { new(...args: any[]): T }, ...args) {
+  add<T>(Class: { new(...args: any[]): T }) {
     const className = new Class().constructor.name;
-    const instances = args.map((item) => this.get(item));
     if (!this.instances[className]) {
-      this.instances[className] = new Class(...instances);
+      this.instances[className] = new Class();
     }
   },
 
@@ -22,4 +21,11 @@ export function Inject(label: any) {
       get: () => Injector.get(label)
     });
   }
+}
+
+export function Injectable() {
+  return (target) => {
+    Injector.add(target);
+    return target;
+  };
 }
