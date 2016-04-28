@@ -1,5 +1,5 @@
 sudo: required
-dist: trusty
+# dist: trusty
 language: node_js
 addons:
   firefox: latest
